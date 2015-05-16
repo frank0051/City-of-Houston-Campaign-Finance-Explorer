@@ -1002,7 +1002,7 @@
       <column caption='Treasurer Zip Code' datatype='string' name='[TreasurerZipCode]' role='dimension' semantic-role='[ZipCode].[Name]' type='nominal'>
       </column>
       <extract count='-1' enabled='true' units='records'>
-        <connection class='dataengine' dbname='C:\Users\e140852\Documents\GitHub\City-of-Houston-Campign-Finance-Explorer\CFR_Campaign_Finance_Coversheet (CSC.CFR_Campaign_Finance_Coversheet) (OpenData).tde' schema='Extract' tablename='Extract' update-time='05/16/2015 05:06:02 PM'>
+        <connection class='dataengine' dbname='C:\Users\Alex\Documents\Hackathon 2015\City-of-Houston-Campaign-Finance-Explorer-master\CFR_Campaign_Finance_Coversheet (CSC.CFR_Campaign_Finance_Coversheet) (OpenData).tde' schema='Extract' tablename='Extract' update-time='05/16/2015 05:06:02 PM'>
           <relation name='Extract' table='[Extract].[Extract]' type='table' />
           <calculations>
             <calculation column='[Number of Records]' formula='1' />
@@ -3647,7 +3647,7 @@
       <column caption='Treasurer Zip Code' datatype='string' name='[TreasurerZipCode]' role='dimension' semantic-role='[ZipCode].[Name]' type='nominal'>
       </column>
       <extract count='-1' enabled='true' units='records'>
-        <connection class='dataengine' dbname='C:\Users\e140852\Documents\GitHub\City-of-Houston-Campign-Finance-Explorer\CFR_Campaign_Finance_ScheduleT (CSC.CFR_Campaign_Finance_ScheduleT) (OpenData).tde' schema='Extract' tablename='Extract' update-time='05/16/2015 05:05:40 PM'>
+        <connection class='dataengine' dbname='C:\Users\Alex\Documents\Hackathon 2015\City-of-Houston-Campaign-Finance-Explorer-master\CFR_Campaign_Finance_ScheduleT (CSC.CFR_Campaign_Finance_ScheduleT) (OpenData).tde' schema='Extract' tablename='Extract' update-time='05/16/2015 05:05:40 PM'>
           <relation name='Extract' table='[Extract].[Extract]' type='table' />
           <calculations>
             <calculation column='[Number of Records]' formula='1' />
@@ -6955,13 +6955,13 @@
       </column>
       <column caption='Ballot Measure ID' datatype='string' name='[BallotMeasureID]' role='dimension' type='nominal'>
       </column>
-      <column caption='Campaign Year' datatype='string' name='[CampaignYear]' role='dimension' type='nominal'>
+      <column aggregation='Count' caption='Campaign Year' datatype='date' datatype-customized='true' name='[CampaignYear]' role='dimension' type='ordinal'>
       </column>
       <column caption='Candidate Committee Address Street' datatype='string' name='[CandidateCommitteeAddressStreet]' role='dimension' type='nominal'>
       </column>
-      <column caption='Candidate Committee City' datatype='string' name='[CandidateCommitteeCity]' role='dimension' type='nominal'>
+      <column caption='Candidate Committee City' datatype='string' name='[CandidateCommitteeCity]' role='dimension' semantic-role='[City].[Name]' type='nominal'>
       </column>
-      <column caption='Candidate Committee State' datatype='string' name='[CandidateCommitteeState]' role='dimension' type='nominal'>
+      <column caption='Candidate Committee State' datatype='string' name='[CandidateCommitteeState]' role='dimension' semantic-role='[State].[Name]' type='nominal'>
       </column>
       <column caption='Candidate Committee Suite' datatype='string' name='[CandidateCommitteeSuite]' role='dimension' type='nominal'>
       </column>
@@ -6981,7 +6981,7 @@
       </column>
       <column caption='Desc Of Collateral' datatype='string' name='[DescOfCollateral]' role='dimension' type='nominal'>
       </column>
-      <column caption='Election Date' datatype='string' name='[ElectionDate]' role='dimension' type='nominal'>
+      <column caption='Election Date' datatype='date' datatype-customized='true' name='[ElectionDate]' role='dimension' type='ordinal'>
       </column>
       <column caption='Election Type' datatype='string' name='[ElectionType]' role='dimension' type='nominal'>
       </column>
@@ -7003,7 +7003,7 @@
       </column>
       <column caption='Loan Guarantor Amount' datatype='real' name='[LoanGuarantorAmount]' role='measure' type='quantitative'>
       </column>
-      <column caption='Loan Guarantor City' datatype='string' name='[LoanGuarantorCity]' role='dimension' type='nominal'>
+      <column caption='Loan Guarantor City' datatype='string' name='[LoanGuarantorCity]' role='dimension' semantic-role='[City].[Name]' type='nominal'>
       </column>
       <column caption='Loan Guarantor Employer' datatype='string' name='[LoanGuarantorEmployer]' role='dimension' type='nominal'>
       </column>
@@ -7013,9 +7013,9 @@
       </column>
       <column caption='Loan Guarantor Occupation' datatype='string' name='[LoanGuarantorOccupation]' role='dimension' type='nominal'>
       </column>
-      <column caption='Loan Guarantor State' datatype='string' name='[LoanGuarantorState]' role='dimension' type='nominal'>
+      <column caption='Loan Guarantor State' datatype='string' name='[LoanGuarantorState]' role='dimension' semantic-role='[State].[Name]' type='nominal'>
       </column>
-      <column caption='Loan Guarantor Zip' datatype='string' name='[LoanGuarantorZip]' role='dimension' type='nominal'>
+      <column caption='Loan Guarantor Zip' datatype='string' name='[LoanGuarantorZip]' role='dimension' semantic-role='[ZipCode].[Name]' type='nominal'>
       </column>
       <column caption='Loan Interest Rate' datatype='string' name='[LoanInterestRate]' role='dimension' type='nominal'>
       </column>
@@ -7056,11 +7056,11 @@
       </column>
       <column caption='Transaction Amount' datatype='real' name='[TransactionAmount]' role='measure' type='quantitative'>
       </column>
-      <column caption='Transaction Date' datatype='string' name='[TransactionDate]' role='dimension' type='nominal'>
+      <column aggregation='Count' caption='Transaction Date' datatype='date' datatype-customized='true' name='[TransactionDate]' role='dimension' type='ordinal'>
       </column>
       <column caption='Transaction ID' datatype='string' name='[TransactionID]' role='dimension' type='nominal'>
       </column>
-      <column caption='Transaction Party City' datatype='string' name='[TransactionPartyCity]' role='dimension' type='nominal'>
+      <column caption='Transaction Party City' datatype='string' name='[TransactionPartyCity]' role='dimension' semantic-role='[City].[Name]' type='nominal'>
       </column>
       <column caption='Transaction Party Employer' datatype='string' name='[TransactionPartyEmployer]' role='dimension' type='nominal'>
       </column>
@@ -7072,11 +7072,11 @@
       </column>
       <column caption='Transaction Party Occupation' datatype='string' name='[TransactionPartyOccupation]' role='dimension' type='nominal'>
       </column>
-      <column caption='Transaction Party State' datatype='string' name='[TransactionPartyState]' role='dimension' type='nominal'>
+      <column caption='Transaction Party State' datatype='string' name='[TransactionPartyState]' role='dimension' semantic-role='[State].[Name]' type='nominal'>
       </column>
       <column caption='Transaction Party Type' datatype='string' name='[TransactionPartyType]' role='dimension' type='nominal'>
       </column>
-      <column caption='Transaction Party Zip' datatype='string' name='[TransactionPartyZip]' role='dimension' type='nominal'>
+      <column caption='Transaction Party Zip' datatype='string' name='[TransactionPartyZip]' role='dimension' semantic-role='[ZipCode].[Name]' type='nominal'>
       </column>
       <column caption='Transaction Type' datatype='string' name='[TransactionType]' role='dimension' type='nominal'>
       </column>
@@ -7084,7 +7084,7 @@
       </column>
       <column caption='Treasurer Address Type' datatype='string' name='[TreasurerAddressType]' role='dimension' type='nominal'>
       </column>
-      <column caption='Treasurer City' datatype='string' name='[TreasurerCity]' role='dimension' type='nominal'>
+      <column caption='Treasurer City' datatype='string' name='[TreasurerCity]' role='dimension' semantic-role='[City].[Name]' type='nominal'>
       </column>
       <column caption='Treasurer First Name' datatype='string' name='[TreasurerFirstName]' role='dimension' type='nominal'>
       </column>
@@ -7094,14 +7094,116 @@
       </column>
       <column caption='Treasurer Phone' datatype='string' name='[TreasurerPhone]' role='dimension' type='nominal'>
       </column>
-      <column caption='Treasurer State' datatype='string' name='[TreasurerState]' role='dimension' type='nominal'>
+      <column caption='Treasurer State' datatype='string' name='[TreasurerState]' role='dimension' semantic-role='[State].[Name]' type='nominal'>
       </column>
       <column caption='Treasurer Suite' datatype='string' name='[TreasurerSuite]' role='dimension' type='nominal'>
       </column>
       <column caption='Treasurer Zip Code' datatype='string' name='[TreasurerZipCode]' role='dimension' semantic-role='[ZipCode].[Name]' type='nominal'>
       </column>
+      <folder name='Ballot Measure Info' role='dimensions'>
+        <folder-item name='[BallotMeasureDescription]' type='field' />
+        <folder-item name='[BallotMeasureID]' type='field' />
+      </folder>
+      <folder name='Candidate Info' role='dimensions'>
+        <folder-item name='[CandidateFirstName]' type='field' />
+        <folder-item name='[CandidateFullName]' type='field' />
+        <folder-item name='[CandidateLastName]' type='field' />
+        <folder-item name='[CandidatePhone]' type='field' />
+        <folder-item name='[OfficeHeld]' type='field' />
+        <folder-item name='[OfficeSought]' type='field' />
+      </folder>
+      <folder name='Committee Info' role='dimensions'>
+        <folder-item name='[CandidateCommitteeAddressStreet]' type='field' />
+        <folder-item name='[CandidateCommitteeCity]' type='field' />
+        <folder-item name='[CandidateCommitteeState]' type='field' />
+        <folder-item name='[CandidateCommitteeSuite]' type='field' />
+        <folder-item name='[CandidateCommitteeZipCode]' type='field' />
+        <folder-item name='[CandidateOrCommittee]' type='field' />
+        <folder-item name='[Committee Purpose]' type='field' />
+        <folder-item name='[CommitteeName]' type='field' />
+      </folder>
+      <folder name='Election Info' role='dimensions'>
+        <folder-item name='[ElectionDate]' type='field' />
+        <folder-item name='[ElectionType]' type='field' />
+      </folder>
+      <folder name='Expense Info' role='dimensions'>
+        <folder-item name='[ExpenseCandidateBeneficiaryName]' type='field' />
+        <folder-item name='[ExpenseCandidateBeneficiaryOfficeSought]' type='field' />
+        <folder-item name='[ExpenseCandidateBenficiaryOfficeHeld]' type='field' />
+        <folder-item name='[ExpenseCategoryDesc]' type='field' />
+        <folder-item name='[ExpenseCategory]' type='field' />
+        <folder-item name='[ExpenseToBeReimbursed]' type='field' />
+      </folder>
+      <folder name='Loan Info' role='dimensions'>
+        <folder-item name='[DescOfCollateral]' type='field' />
+        <folder-item name='[IsLenderFinancialInsitution]' type='field' />
+        <folder-item name='[LoanGuarantorCity]' type='field' />
+        <folder-item name='[LoanGuarantorEmployer]' type='field' />
+        <folder-item name='[LoanGuarantorInfo]' type='field' />
+        <folder-item name='[LoanGuarantorName]' type='field' />
+        <folder-item name='[LoanGuarantorOccupation]' type='field' />
+        <folder-item name='[LoanGuarantorState]' type='field' />
+        <folder-item name='[LoanGuarantorZip]' type='field' />
+        <folder-item name='[LoanInterestRate]' type='field' />
+        <folder-item name='[LoanMaturityDate]' type='field' />
+      </folder>
+      <folder name='Report Info' role='dimensions'>
+        <folder-item name='[CampaignYear]' type='field' />
+        <folder-item name='[PeriodBegining]' type='field' />
+        <folder-item name='[PeriodEnding]' type='field' />
+        <folder-item name='[ReportFiledDate]' type='field' />
+        <folder-item name='[ReportID]' type='field' />
+        <folder-item name='[ScheduleLongName]' type='field' />
+        <folder-item name='[ScheduleShortName]' type='field' />
+        <folder-item name='[SummarizedOnCoverSheet]' type='field' />
+      </folder>
+      <folder name='Transaction Info' role='dimensions'>
+        <folder-item name='[MasterTransactionType]' type='field' />
+        <folder-item name='[TransactionAddressStreet]' type='field' />
+        <folder-item name='[TransactionAddressSuite]' type='field' />
+        <folder-item name='[TransactionDate]' type='field' />
+        <folder-item name='[TransactionID]' type='field' />
+        <folder-item name='[TransactionType]' type='field' />
+      </folder>
+      <folder name='Transaction Party Info' role='dimensions'>
+        <folder-item name='[OutofStatePACID]' type='field' />
+        <folder-item name='[TransactionPartyCity]' type='field' />
+        <folder-item name='[TransactionPartyEmployer]' type='field' />
+        <folder-item name='[TransactionPartyFirstName]' type='field' />
+        <folder-item name='[TransactionPartyFullName]' type='field' />
+        <folder-item name='[TransactionPartyLastName]' type='field' />
+        <folder-item name='[TransactionPartyOccupation]' type='field' />
+        <folder-item name='[TransactionPartyState]' type='field' />
+        <folder-item name='[TransactionPartyType]' type='field' />
+        <folder-item name='[TransactionPartyZip]' type='field' />
+      </folder>
+      <folder name='Treasurer Info' role='dimensions'>
+        <folder-item name='[TreasurerAddressStreet]' type='field' />
+        <folder-item name='[TreasurerAddressType]' type='field' />
+        <folder-item name='[TreasurerCity]' type='field' />
+        <folder-item name='[TreasurerFirstName]' type='field' />
+        <folder-item name='[TreasurerFullName]' type='field' />
+        <folder-item name='[TreasurerLastName]' type='field' />
+        <folder-item name='[TreasurerPhone]' type='field' />
+        <folder-item name='[TreasurerState]' type='field' />
+        <folder-item name='[TreasurerSuite]' type='field' />
+        <folder-item name='[TreasurerZipCode]' type='field' />
+      </folder>
+      <folder name='Report Types' role='measures'>
+        <folder-item name='[10th day after campaign treasurer termination]' type='field' />
+        <folder-item name='[15-Jan]' type='field' />
+        <folder-item name='[15-Jul]' type='field' />
+        <folder-item name='[15th day after campaign treasurer appointment]' type='field' />
+        <folder-item name='[30th day before election]' type='field' />
+        <folder-item name='[8th day before election]' type='field' />
+        <folder-item name='[Dissolution (attach PAC-DR)]' type='field' />
+        <folder-item name='[Exceeded $500 limit]' type='field' />
+        <folder-item name='[Final report]' type='field' />
+        <folder-item name='[MostRecentReportVersion]' type='field' />
+        <folder-item name='[Runoff]' type='field' />
+      </folder>
       <extract count='-1' enabled='true' units='records'>
-        <connection class='dataengine' dbname='C:\Users\e140852\Documents\GitHub\City-of-Houston-Campign-Finance-Explorer\CFR_Campaign_Finance_Transactions (CSC.CFR_Campaign_Finance_Transactions) (OpenData).tde' schema='Extract' tablename='Extract' update-time='05/16/2015 05:05:07 PM'>
+        <connection class='dataengine' dbname='C:\Users\Alex\Documents\Hackathon 2015\City-of-Houston-Campaign-Finance-Explorer-master\CFR_Campaign_Finance_Transactions (CSC.CFR_Campaign_Finance_Transactions) (OpenData).tde' schema='Extract' tablename='Extract' update-time='05/16/2015 05:05:07 PM'>
           <relation name='Extract' table='[Extract].[Extract]' type='table' />
           <calculations>
             <calculation column='[Number of Records]' formula='1' />
@@ -9610,7 +9712,7 @@
           </metadata-records>
         </connection>
       </extract>
-      <layout dim-ordering='alphabetic' dim-percentage='0.5' measure-ordering='alphabetic' measure-percentage='0.4' show-structure='true' />
+      <layout dim-ordering='alphabetic' dim-percentage='0.5' measure-ordering='alphabetic' measure-percentage='0.4' show-structure='false' />
       <semantic-values>
         <semantic-value key='[Country].[Name]' value='&quot;United States&quot;' />
       </semantic-values>
@@ -9659,11 +9761,21 @@
           </strip>
         </edge>
       </cards>
+      <highlight>
+        <color-one-way>
+          <field>[sqlserver.42140.501410567129].[none:BallotMeasureDescription:nk]</field>
+          <field>[sqlserver.42140.501410567129].[none:BallotMeasureID:nk]</field>
+          <field>[sqlserver.42140.501410567129].[none:ElectionDate:qk]</field>
+          <field>[sqlserver.42140.501410567129].[none:MasterTransactionType:nk]</field>
+          <field>[sqlserver.42140.501410567129].[none:TransactionType:nk]</field>
+          <field>[sqlserver.42140.501410567129].[yr:ElectionDate:ok]</field>
+        </color-one-way>
+      </highlight>
     </window>
   </windows>
   <thumbnails>
     <thumbnail height='144' name='Sheet 1' width='174'>
-      iVBORw0KGgoAAAANSUhEUgAAAK4AAACQCAYAAACRfFAzAAAACXBIWXMAAA7DAAAOwwHHb6hk
+      iVBORw0KGgoAAAANSUhEUgAAAK4AAACQCAYAAACRfFAzAAAACXBIWXMAABJ0AAASdAHeZh94
       AAABmUlEQVR4nO3SQQ0AIBDAMMC/58MDH7KkVbDH9szMgpjzOwBeGJck45JkXJKMS5JxSTIu
       ScYlybgkGZck45JkXJKMS5JxSTIuScYlybgkGZck45JkXJKMS5JxSTIuScYlybgkGZck45Jk
       XJKMS5JxSTIuScYlybgkGZck45JkXJKMS5JxSTIuScYlybgkGZck45JkXJKMS5JxSTIuScYl
