@@ -1002,7 +1002,7 @@
       <column caption='Treasurer Zip Code' datatype='string' name='[TreasurerZipCode]' role='dimension' semantic-role='[ZipCode].[Name]' type='nominal'>
       </column>
       <extract count='-1' enabled='true' units='records'>
-        <connection class='dataengine' dbname='C:\Users\Alex\Documents\Hackathon 2015\City-of-Houston-Campaign-Finance-Explorer-master\CFR_Campaign_Finance_Coversheet (CSC.CFR_Campaign_Finance_Coversheet) (OpenData).tde' schema='Extract' tablename='Extract' update-time='05/16/2015 05:06:02 PM'>
+        <connection class='dataengine' dbname='C:\Users\e140852\Documents\GitHub\City-of-Houston-Campaign-Finance-Explorer\CFR_Campaign_Finance_Coversheet (CSC.CFR_Campaign_Finance_Coversheet) (OpenData).tde' schema='Extract' tablename='Extract' update-time='05/16/2015 05:06:02 PM'>
           <relation name='Extract' table='[Extract].[Extract]' type='table' />
           <calculations>
             <calculation column='[Number of Records]' formula='1' />
@@ -3647,7 +3647,7 @@
       <column caption='Treasurer Zip Code' datatype='string' name='[TreasurerZipCode]' role='dimension' semantic-role='[ZipCode].[Name]' type='nominal'>
       </column>
       <extract count='-1' enabled='true' units='records'>
-        <connection class='dataengine' dbname='C:\Users\Alex\Documents\Hackathon 2015\City-of-Houston-Campaign-Finance-Explorer-master\CFR_Campaign_Finance_ScheduleT (CSC.CFR_Campaign_Finance_ScheduleT) (OpenData).tde' schema='Extract' tablename='Extract' update-time='05/16/2015 05:05:40 PM'>
+        <connection class='dataengine' dbname='C:\Users\e140852\Documents\GitHub\City-of-Houston-Campaign-Finance-Explorer\CFR_Campaign_Finance_ScheduleT (CSC.CFR_Campaign_Finance_ScheduleT) (OpenData).tde' schema='Extract' tablename='Extract' update-time='05/16/2015 05:05:40 PM'>
           <relation name='Extract' table='[Extract].[Extract]' type='table' />
           <calculations>
             <calculation column='[Number of Records]' formula='1' />
@@ -6955,7 +6955,280 @@
       </column>
       <column caption='Ballot Measure ID' datatype='string' name='[BallotMeasureID]' role='dimension' type='nominal'>
       </column>
+      <column caption='Candidate Name' datatype='string' name='[Calculation_0980516152237968]' role='dimension' type='nominal'>
+        <calculation class='tableau' formula='TRIM(TRIM(IFNULL([CandidateFirstName],&apos;&apos;))+&apos; &apos;+TRIM(IFNULL([CandidateLastName],&apos;&apos;)))' />
+      </column>
+      <column caption='Office Sought or Held' datatype='string' name='[Calculation_6000516161457122]' role='dimension' type='nominal'>
+        <calculation class='tableau' formula='Iif(TRIM([OfficeSought])=&quot;N/A&quot; OR TRIM([OfficeSought])=&quot;X&quot; OR ISNULL([OfficeSought]),&#13;&#10;[OfficeHeld],[OfficeSought])' />
+      </column>
+      <column caption='Candidate or Committee Name' datatype='string' name='[Calculation_8640516161205410]' role='dimension' type='nominal'>
+        <calculation class='tableau' formula='IiF(ISNULL([Calculation_0980516152237968]) or TRIM([Calculation_0980516152237968])=&quot;&quot;,&#13;&#10;[CommitteeName],[Calculation_0980516152237968])' />
+      </column>
       <column aggregation='Count' caption='Campaign Year' datatype='date' datatype-customized='true' name='[CampaignYear]' role='dimension' type='ordinal'>
+      </column>
+      <column datatype='string' name='[Candidate Name (group)]' role='dimension' type='nominal'>
+        <calculation class='categorical-bin' column='[Calculation_0980516152237968]'>
+          <bin value='&quot;Al&quot;'>
+            <value>&quot;Al&quot;</value>
+            <value>&quot;Al Hoang&quot;</value>
+          </bin>
+          <bin value='&quot;Anne&quot;'>
+            <value>&quot;Anne&quot;</value>
+            <value>&quot;Anne Clutterbuck&quot;</value>
+          </bin>
+          <bin value='&quot;Antoinette Lawrence&quot;'>
+            <value>&quot;Antoinette Lawrence&quot;</value>
+            <value>&quot;Antoniette Lawrence&quot;</value>
+          </bin>
+          <bin value='&quot;Ben Hall&quot;'>
+            <value>&quot;Ben Hall&quot;</value>
+            <value>&quot;Benjamin Hall&quot;</value>
+          </bin>
+          <bin value='&quot;Bill King&quot;'>
+            <value>&quot;Bill King&quot;</value>
+            <value>&quot;William King&quot;</value>
+          </bin>
+          <bin value='&quot;Don Cook&quot;'>
+            <value>&quot;Don Cook&quot;</value>
+            <value>&quot;Donald Cook&quot;</value>
+          </bin>
+          <bin value='&quot;Gene&quot;'>
+            <value>&quot;Gene&quot;</value>
+            <value>&quot;Gene Locke&quot;</value>
+          </bin>
+          <bin value='&quot;Georgia Provost&quot;'>
+            <value>&quot;Georgia Provost&quot;</value>
+            <value>&quot;Provost&quot;</value>
+          </bin>
+          <bin value='&quot;Jarvis Johnson&quot;'>
+            <value>&quot;Jarvis Johnson&quot;</value>
+            <value>&quot;Jarvisw Johnson&quot;</value>
+          </bin>
+          <bin value='&quot;KATHERINE BLUEFORD-DANIELS&quot;'>
+            <value>&quot;KATHERINE BLUEFORD-DANIELS&quot;</value>
+            <value>&quot;Kathy BLUEFORD-DANIELS&quot;</value>
+          </bin>
+          <bin value='&quot;M Khan&quot;'>
+            <value>&quot;M Khan&quot;</value>
+            <value>&quot;M.J Khan&quot;</value>
+            <value>&quot;M.J. Khan&quot;</value>
+            <value>&quot;MJ Khan&quot;</value>
+          </bin>
+          <bin value='&quot;Mayor &amp; Councilmembers Inaugural Celebration&quot;'>
+            <value>&quot;Mayor &amp; Councilmembers Inaugural Celebration&quot;</value>
+            <value>&quot;Mayor &amp; Councilmembers Inaugural Celebrations&quot;</value>
+            <value>&quot;Mayor and Councilmembers Inaugural Celebrations&quot;</value>
+          </bin>
+          <bin value='&quot;MICHAEL Sullivan&quot;'>
+            <value>&quot;MICHAEL Sullivan&quot;</value>
+            <value>&quot;Mike&quot;</value>
+            <value>&quot;Mike Sullivan&quot;</value>
+          </bin>
+          <bin value='&quot;MICHAEL Willams&quot;'>
+            <value>&quot;MICHAEL Willams&quot;</value>
+            <value>&quot;MICHAEL Williams&quot;</value>
+          </bin>
+          <bin value='&quot;Modesto Rivera&quot;'>
+            <value>&quot;Modesto Rivera&quot;</value>
+            <value>&quot;Modesto Rivera - Colon&quot;</value>
+          </bin>
+          <bin value='&quot;Pam Holm&quot;'>
+            <value>&quot;Pam Holm&quot;</value>
+            <value>&quot;Pamela Holm&quot;</value>
+          </bin>
+          <bin value='&quot;Richard Rodrigeuz&quot;'>
+            <value>&quot;Richard Rodrigeuz&quot;</value>
+            <value>&quot;Richard Rodriguez&quot;</value>
+          </bin>
+          <bin value='&quot;Rogelio Morales&quot;'>
+            <value>&quot;Rogelio Morales&quot;</value>
+            <value>&quot;Rogelio Morles&quot;</value>
+          </bin>
+          <bin value='&quot;Sue&quot;'>
+            <value>&quot;Sue&quot;</value>
+            <value>&quot;Sue Lovell&quot;</value>
+          </bin>
+          <bin value='&quot;William&quot;'>
+            <value>&quot;William&quot;</value>
+            <value>&quot;William Knox&quot;</value>
+          </bin>
+          <bin value='&quot;William (Bill) White&quot;'>
+            <value>&quot;William (Bill) White&quot;</value>
+            <value>&quot;William White&quot;</value>
+          </bin>
+        </calculation>
+        <aliases>
+          <alias key='&quot;Al&quot;' value='Al Hoang' />
+          <alias key='&quot;ALVIN BYRD&quot;' value='Alvin Byrd' />
+          <alias key='&quot;Amy PRICE&quot;' value='Amy Price' />
+          <alias key='&quot;Anne&quot;' value='Anne Clutterbuck' />
+          <alias key='&quot;Antoinette Lawrence&quot;' value='Antoniette Lawrence' />
+          <alias key='&quot;Ben Hall&quot;' value='Ben Hall' />
+          <alias key='&quot;Ben MENDEZ&quot;' value='Ben Mendez' />
+          <alias key='&quot;Bill King&quot;' value='Bill King' />
+          <alias key='&quot;BRYAN SMART&quot;' value='Bryan Smart' />
+          <alias key='&quot;CLARENCE BRADFORD&quot;' value='Clarence Bradford' />
+          <alias key='&quot;Don Cook&quot;' value='Donald Cook' />
+          <alias key='&quot;Gene&quot;' value='Gene Locke' />
+          <alias key='&quot;Georgia Provost&quot;' value='Georgia Provost' />
+          <alias key='&quot;GRACIANA GARCES&quot;' value='Graciana Garces' />
+          <alias key='&quot;Jarvis Johnson&quot;' value='Jarvis Johnson' />
+          <alias key='&quot;JOHN MARRON&quot;' value='John Marron' />
+          <alias key='&quot;KATHERINE BLUEFORD-DANIELS&quot;' value='Katherine Blueford-Daniels' />
+          <alias key='&quot;LAWRENCE ALLEN&quot;' value='Lawrence Allen' />
+          <alias key='&quot;M Khan&quot;' value='M.J. Khan' />
+          <alias key='&quot;MARK LEE&quot;' value='Mark Lee' />
+          <alias key='&quot;Mayor &amp; Councilmembers Inaugural Celebration&quot;' value='Mayor and Councilmembers Inaugural Celebrations' />
+          <alias key='&quot;MICHAEL Berry&quot;' value='Michael Berry' />
+          <alias key='&quot;MICHAEL KUBOSH&quot;' value='Michael Kubosh' />
+          <alias key='&quot;MICHAEL Laster&quot;' value='Michael Laster' />
+          <alias key='&quot;MICHAEL Sullivan&quot;' value='Mike Sullivan' />
+          <alias key='&quot;MICHAEL Willams&quot;' value='Michael Williams' />
+          <alias key='&quot;Modesto Rivera&quot;' value='Modesto Rivera - Colon' />
+          <alias key='&quot;Mr.&quot;' value='Guadalupe Garcia' />
+          <alias key='&quot;Pam Holm&quot;' value='Pam Holm' />
+          <alias key='&quot;Richard Rodrigeuz&quot;' value='Richard Rodriguez' />
+          <alias key='&quot;Robert GLASER&quot;' value='Robert Glaser' />
+          <alias key='&quot;Rogelio Morales&quot;' value='Rogelio Morales' />
+          <alias key='&quot;Sue&quot;' value='Sue Lovell' />
+          <alias key='&quot;William&quot;' value='William Knox' />
+          <alias key='&quot;William (Bill) White&quot;' value='William White' />
+        </aliases>
+      </column>
+      <column datatype='string' name='[Candidate or Committee Name (group)]' role='dimension' type='nominal'>
+        <calculation class='categorical-bin' column='[Calculation_8640516161205410]'>
+          <bin value='&quot;2008 Houston Inaugural Committee&quot;'>
+            <value>&quot;2008 Houston Inaugural Committee&quot;</value>
+            <value>&quot;See Attached&quot;</value>
+          </bin>
+          <bin value='&quot;Al&quot;'>
+            <value>&quot;Al&quot;</value>
+            <value>&quot;Al Hoang&quot;</value>
+          </bin>
+          <bin value='&quot;Anne&quot;'>
+            <value>&quot;Anne&quot;</value>
+            <value>&quot;Anne Clutterbuck&quot;</value>
+          </bin>
+          <bin value='&quot;Antoinette Lawrence&quot;'>
+            <value>&quot;Antoinette Lawrence&quot;</value>
+            <value>&quot;Antoniette Lawrence&quot;</value>
+          </bin>
+          <bin value='&quot;Bill King&quot;'>
+            <value>&quot;Bill King&quot;</value>
+            <value>&quot;William King&quot;</value>
+          </bin>
+          <bin value='&quot;Don Cook&quot;'>
+            <value>&quot;Don Cook&quot;</value>
+            <value>&quot;Donald Cook&quot;</value>
+          </bin>
+          <bin value='&quot;Gene&quot;'>
+            <value>&quot;Gene&quot;</value>
+            <value>&quot;Gene Locke&quot;</value>
+          </bin>
+          <bin value='&quot;Georgia Provost&quot;'>
+            <value>&quot;Georgia Provost&quot;</value>
+            <value>&quot;Provost&quot;</value>
+          </bin>
+          <bin value='&quot;Jarvis Johnson&quot;'>
+            <value>&quot;Jarvis Johnson&quot;</value>
+            <value>&quot;Jarvisw Johnson&quot;</value>
+          </bin>
+          <bin value='&quot;KATHERINE BLUEFORD-DANIELS&quot;'>
+            <value>&quot;KATHERINE BLUEFORD-DANIELS&quot;</value>
+            <value>&quot;Kathy BLUEFORD-DANIELS&quot;</value>
+          </bin>
+          <bin value='&quot;M Khan&quot;'>
+            <value>&quot;M Khan&quot;</value>
+            <value>&quot;M.J Khan&quot;</value>
+            <value>&quot;M.J. Khan&quot;</value>
+            <value>&quot;MJ Khan&quot;</value>
+          </bin>
+          <bin value='&quot;Mayor &amp; Councilmembers Inaugural Celebration&quot;'>
+            <value>&quot;Mayor &amp; Councilmembers Inaugural Celebration&quot;</value>
+            <value>&quot;Mayor &amp; Councilmembers Inaugural Celebrations&quot;</value>
+            <value>&quot;Mayor and Councilmembers Inaugural Celebrations&quot;</value>
+          </bin>
+          <bin value='&quot;MICHAEL Sullivan&quot;'>
+            <value>&quot;MICHAEL Sullivan&quot;</value>
+            <value>&quot;Mike&quot;</value>
+            <value>&quot;Mike Sullivan&quot;</value>
+          </bin>
+          <bin value='&quot;MICHAEL Willams&quot;'>
+            <value>&quot;MICHAEL Willams&quot;</value>
+            <value>&quot;MICHAEL Williams&quot;</value>
+          </bin>
+          <bin value='&quot;Modesto Rivera&quot;'>
+            <value>&quot;Modesto Rivera&quot;</value>
+            <value>&quot;Modesto Rivera - Colon&quot;</value>
+          </bin>
+          <bin value='&quot;No Rain Tac PAC&quot;'>
+            <value>&quot;No Rain Tac PAC&quot;</value>
+            <value>&quot;No Rain Tax&quot;</value>
+            <value>&quot;No Rain Tax PAC&quot;</value>
+          </bin>
+          <bin value='&quot;Pam Holm&quot;'>
+            <value>&quot;Pam Holm&quot;</value>
+            <value>&quot;Pamela Holm&quot;</value>
+          </bin>
+          <bin value='&quot;Richard Rodrigeuz&quot;'>
+            <value>&quot;Richard Rodrigeuz&quot;</value>
+            <value>&quot;Richard Rodriguez&quot;</value>
+          </bin>
+          <bin value='&quot;Rogelio Morales&quot;'>
+            <value>&quot;Rogelio Morales&quot;</value>
+            <value>&quot;Rogelio Morles&quot;</value>
+            <value>&quot;Roy Morales&quot;</value>
+          </bin>
+          <bin value='&quot;Sue&quot;'>
+            <value>&quot;Sue&quot;</value>
+            <value>&quot;Sue Lovell&quot;</value>
+          </bin>
+          <bin value='&quot;William&quot;'>
+            <value>&quot;William&quot;</value>
+            <value>&quot;William Knox&quot;</value>
+          </bin>
+          <bin value='&quot;William (Bill) White&quot;'>
+            <value>&quot;William (Bill) White&quot;</value>
+            <value>&quot;William White&quot;</value>
+          </bin>
+        </calculation>
+        <aliases>
+          <alias key='&quot;2008 Houston Inaugural Committee&quot;' value='2008 Houston Inaugural Committee' />
+          <alias key='&quot;Al&quot;' value='Al Hoang' />
+          <alias key='&quot;ALVIN BYRD&quot;' value='Alvin Byrd' />
+          <alias key='&quot;Amy PRICE&quot;' value='Amy Price' />
+          <alias key='&quot;Anne&quot;' value='Anne Clutterbuck' />
+          <alias key='&quot;Antoinette Lawrence&quot;' value='Antoniette Lawrence' />
+          <alias key='&quot;Ben MENDEZ&quot;' value='Ben Mendez' />
+          <alias key='&quot;Bill King&quot;' value='Bill King' />
+          <alias key='&quot;CLARENCE BRADFORD&quot;' value='Clarence Bradford' />
+          <alias key='&quot;Don Cook&quot;' value='Donald Cook' />
+          <alias key='&quot;Gene&quot;' value='Gene Locke' />
+          <alias key='&quot;Georgia Provost&quot;' value='Georgia Provost' />
+          <alias key='&quot;Jarvis Johnson&quot;' value='Jarvis Johnson' />
+          <alias key='&quot;JOHN MARRON&quot;' value='John Marron' />
+          <alias key='&quot;KATHERINE BLUEFORD-DANIELS&quot;' value='Katherine Blueford-Daniels' />
+          <alias key='&quot;LAWRENCE ALLEN&quot;' value='Lawrence Allen' />
+          <alias key='&quot;M Khan&quot;' value='M.J. Khan' />
+          <alias key='&quot;MARK LEE&quot;' value='Mark Lee' />
+          <alias key='&quot;Mayor &amp; Councilmembers Inaugural Celebration&quot;' value='Mayor and Councilmembers Inaugural Celebrations' />
+          <alias key='&quot;MICHAEL Berry&quot;' value='Michael Berry' />
+          <alias key='&quot;MICHAEL KUBOSH&quot;' value='Michael Kubosh' />
+          <alias key='&quot;MICHAEL Laster&quot;' value='Michael Laster' />
+          <alias key='&quot;MICHAEL Sullivan&quot;' value='Mike Sullivan' />
+          <alias key='&quot;MICHAEL Willams&quot;' value='Michael Williams' />
+          <alias key='&quot;Modesto Rivera&quot;' value='Modesto Rivera - Colon' />
+          <alias key='&quot;Mr.&quot;' value='Guadalupe Garcia' />
+          <alias key='&quot;No No&quot;' value='City Charter Referendum for Capital Improvement Program' />
+          <alias key='&quot;No Rain Tac PAC&quot;' value='No Rain Tax PAC' />
+          <alias key='&quot;Pam Holm&quot;' value='Pam Holm' />
+          <alias key='&quot;Richard Rodrigeuz&quot;' value='Richard Rodrigeuz' />
+          <alias key='&quot;Robert GLASER&quot;' value='Robert Glaser' />
+          <alias key='&quot;Rogelio Morales&quot;' value='Rogelio Morales' />
+          <alias key='&quot;Sue&quot;' value='Sue Lovell' />
+          <alias key='&quot;William&quot;' value='William Knox' />
+          <alias key='&quot;William (Bill) White&quot;' value='Bill White' />
+        </aliases>
       </column>
       <column caption='Candidate Committee Address Street' datatype='string' name='[CandidateCommitteeAddressStreet]' role='dimension' type='nominal'>
       </column>
@@ -6981,9 +7254,367 @@
       </column>
       <column caption='Desc Of Collateral' datatype='string' name='[DescOfCollateral]' role='dimension' type='nominal'>
       </column>
+      <column datatype='string' name='[Election Type (group)]' role='dimension' type='nominal'>
+        <calculation class='categorical-bin' column='[ElectionType]'>
+          <bin value='&quot;G&quot;'>
+            <value>&quot;G&quot;</value>
+            <value>&quot;General&quot;</value>
+            <value>&quot;Municipal&quot;</value>
+            <value>&quot;n/a&quot;</value>
+            <value>&quot;Primary&quot;</value>
+            <value>&quot;X&quot;</value>
+          </bin>
+          <bin value='&quot;R&quot;'>
+            <value>&quot;R&quot;</value>
+            <value>&quot;Run Off&quot;</value>
+            <value>&quot;Runoff&quot;</value>
+          </bin>
+        </calculation>
+        <aliases>
+          <alias key='&quot;G&quot;' value='General' />
+          <alias key='&quot;R&quot;' value='Run-Off' />
+        </aliases>
+      </column>
       <column caption='Election Date' datatype='date' datatype-customized='true' name='[ElectionDate]' role='dimension' type='ordinal'>
       </column>
       <column caption='Election Type' datatype='string' name='[ElectionType]' role='dimension' type='nominal'>
+      </column>
+      <column datatype='string' name='[Expense Category (group)]' role='dimension' type='nominal'>
+        <calculation class='categorical-bin' column='[ExpenseCategory]'>
+          <bin value='&quot;20121031&quot;'>
+            <value>&quot;20121031&quot;</value>
+            <value>&quot;20121130&quot;</value>
+            <value>&quot;20121231&quot;</value>
+            <value>&quot;Campaign&quot;</value>
+            <value>&quot;Campaign administration expense&quot;</value>
+            <value>&quot;Campaign Adminstration Expense&quot;</value>
+            <value>&quot;Campaign expense&quot;</value>
+            <value>&quot;Campaign expenses&quot;</value>
+            <value>&quot;Campaign Income&quot;</value>
+            <value>&quot;Campaign Support&quot;</value>
+            <value>&quot;Membership expense&quot;</value>
+            <value>&quot;Other&quot;</value>
+            <value>&quot;OTHER (enter a category not listed above)&quot;</value>
+            <value>&quot;OTHER (Online Expense)&quot;</value>
+            <value>&quot;Services&quot;</value>
+            <value>&quot;Stakes&quot;</value>
+            <value>&quot;xxxxxxxxx&quot;</value>
+            <value>&quot;xxxxxxxxxxx&quot;</value>
+          </bin>
+          <bin value='&quot;Accounting Expense&quot;'>
+            <value>&quot;Accounting Expense&quot;</value>
+            <value>&quot;accounting services&quot;</value>
+            <value>&quot;Accounting/ Banking&quot;</value>
+            <value>&quot;Accounting/Banking&quot;</value>
+            <value>&quot;Accounting/Banking Services&quot;</value>
+            <value>&quot;American Express&quot;</value>
+            <value>&quot;Baking&quot;</value>
+            <value>&quot;BANK CHARGE&quot;</value>
+            <value>&quot;Bank Charges&quot;</value>
+            <value>&quot;bank charges new checks&quot;</value>
+            <value>&quot;Bank Chge&quot;</value>
+            <value>&quot;Bank Chges&quot;</value>
+            <value>&quot;bank fees&quot;</value>
+            <value>&quot;Banking&quot;</value>
+            <value>&quot;Banking expense&quot;</value>
+            <value>&quot;CHECK ORDER&quot;</value>
+            <value>&quot;credit card processing fee&quot;</value>
+            <value>&quot;Financial Services&quot;</value>
+            <value>&quot;stop payment fee for lost check&quot;</value>
+          </bin>
+          <bin value='&quot;ad&quot;'>
+            <value>&quot;ad&quot;</value>
+            <value>&quot;ad in program&quot;</value>
+            <value>&quot;Advertisement&quot;</value>
+            <value>&quot;Advertising&quot;</value>
+            <value>&quot;Advertising  Expense&quot;</value>
+            <value>&quot;Advertising Expense&quot;</value>
+            <value>&quot;Communication expense&quot;</value>
+            <value>&quot;Courier expense&quot;</value>
+            <value>&quot;Design expense&quot;</value>
+            <value>&quot;direct mail and printing&quot;</value>
+            <value>&quot;Email expense&quot;</value>
+            <value>&quot;Iprint Flyers&quot;</value>
+            <value>&quot;Jensen Jubilee Community Event T Shirt Order&quot;</value>
+            <value>&quot;Mail&quot;</value>
+            <value>&quot;Mail expense&quot;</value>
+            <value>&quot;Mailer Design&quot;</value>
+            <value>&quot;Mailer expense&quot;</value>
+            <value>&quot;Mailing&quot;</value>
+            <value>&quot;Mailing expense&quot;</value>
+            <value>&quot;Markerting&quot;</value>
+            <value>&quot;Marketing&quot;</value>
+            <value>&quot;Media&quot;</value>
+            <value>&quot;Media expense&quot;</value>
+            <value>&quot;Online expense&quot;</value>
+            <value>&quot;Photo expense&quot;</value>
+            <value>&quot;post office box rental&quot;</value>
+            <value>&quot;postage&quot;</value>
+            <value>&quot;Postage expense&quot;</value>
+            <value>&quot;PROMOTIONS&quot;</value>
+            <value>&quot;Public relations expense&quot;</value>
+            <value>&quot;reprint of photo for use in Mayor Pro Tem office&quot;</value>
+            <value>&quot;SIGNS AND ADVERTISING&quot;</value>
+            <value>&quot;Social Media&quot;</value>
+            <value>&quot;T-shirt expense&quot;</value>
+            <value>&quot;telemarketing&quot;</value>
+            <value>&quot;Web expense&quot;</value>
+            <value>&quot;Web Services&quot;</value>
+            <value>&quot;Website&quot;</value>
+            <value>&quot;Website expense&quot;</value>
+            <value>&quot;website fee&quot;</value>
+            <value>&quot;website fees&quot;</value>
+          </bin>
+          <bin value='&quot;Administrative expense&quot;'>
+            <value>&quot;Administrative expense&quot;</value>
+            <value>&quot;Administrative staff expense&quot;</value>
+            <value>&quot;BLOCK WALK TEAM&quot;</value>
+            <value>&quot;Bonus&quot;</value>
+            <value>&quot;Card Pushers&quot;</value>
+            <value>&quot;Compliance consulting&quot;</value>
+            <value>&quot;consultants&quot;</value>
+            <value>&quot;Consulting&quot;</value>
+            <value>&quot;Consulting Expense&quot;</value>
+            <value>&quot;Consulting Fee&quot;</value>
+            <value>&quot;Consulting Fees&quot;</value>
+            <value>&quot;contract labor&quot;</value>
+            <value>&quot;contract services&quot;</value>
+            <value>&quot;Labor&quot;</value>
+            <value>&quot;Melissa Noriega&quot;</value>
+            <value>&quot;Salaries/Wages/Contract Labor&quot;</value>
+            <value>&quot;Salary&quot;</value>
+            <value>&quot;STAFF&quot;</value>
+            <value>&quot;staff bonus&quot;</value>
+            <value>&quot;Staff expense&quot;</value>
+            <value>&quot;Volunteer expense&quot;</value>
+            <value>&quot;Year End Bonus&quot;</value>
+          </bin>
+          <bin value='&quot;Admission&quot;'>
+            <value>&quot;Admission&quot;</value>
+            <value>&quot;Appreciation Event Support&quot;</value>
+            <value>&quot;Campaign Event&quot;</value>
+            <value>&quot;Community event&quot;</value>
+            <value>&quot;Community event expense&quot;</value>
+            <value>&quot;Early Vote and Election Day Activity&quot;</value>
+            <value>&quot;event&quot;</value>
+            <value>&quot;event deposit - to honor outgoing finance dir.&quot;</value>
+            <value>&quot;Event Expense&quot;</value>
+            <value>&quot;Event Expenses&quot;</value>
+            <value>&quot;event sponsor&quot;</value>
+            <value>&quot;event sponsorship&quot;</value>
+            <value>&quot;Fundraiser Expense&quot;</value>
+            <value>&quot;Fundraising expense&quot;</value>
+            <value>&quot;meeting&quot;</value>
+            <value>&quot;Meeting and appreciation expense&quot;</value>
+            <value>&quot;Meeting expense&quot;</value>
+            <value>&quot;meeting expense dinner&quot;</value>
+            <value>&quot;meeting sponsorship&quot;</value>
+            <value>&quot;meeting with council staff&quot;</value>
+            <value>&quot;meetings&quot;</value>
+            <value>&quot;Production expense&quot;</value>
+            <value>&quot;Producton&quot;</value>
+            <value>&quot;public event&quot;</value>
+            <value>&quot;table decorations for event hosted by Mayor Pro Tem&quot;</value>
+          </bin>
+          <bin value='&quot;Archiving expense&quot;'>
+            <value>&quot;Archiving expense&quot;</value>
+            <value>&quot;Campaign database expense&quot;</value>
+            <value>&quot;Campaign Office&quot;</value>
+            <value>&quot;Campaign Phone&quot;</value>
+            <value>&quot;Database expense&quot;</value>
+            <value>&quot;equipment expense&quot;</value>
+            <value>&quot;Hardware&quot;</value>
+            <value>&quot;Headquarters expense&quot;</value>
+            <value>&quot;Information technology expense&quot;</value>
+            <value>&quot;Insurance expense&quot;</value>
+            <value>&quot;Internet&quot;</value>
+            <value>&quot;internet commection&quot;</value>
+            <value>&quot;internet connection&quot;</value>
+            <value>&quot;Internet expense&quot;</value>
+            <value>&quot;lease termination&quot;</value>
+            <value>&quot;Maintenance&quot;</value>
+            <value>&quot;map&quot;</value>
+            <value>&quot;Map expense&quot;</value>
+            <value>&quot;name badges&quot;</value>
+            <value>&quot;OFFICE&quot;</value>
+            <value>&quot;Office Equipment&quot;</value>
+            <value>&quot;Office expense&quot;</value>
+            <value>&quot;Office Overhead&quot;</value>
+            <value>&quot;Office Overhead/ Rental Expense&quot;</value>
+            <value>&quot;Office Overhead/Rental Expense&quot;</value>
+            <value>&quot;Office Overhead/Rental Expense paper clips,staples, stapler, jumbo clips&quot;</value>
+            <value>&quot;office rent&quot;</value>
+            <value>&quot;office sup  printer ink&quot;</value>
+            <value>&quot;Office Supplies&quot;</value>
+            <value>&quot;Office Supplies/Phones&quot;</value>
+            <value>&quot;Office Supplies/Printing&quot;</value>
+            <value>&quot;Operation expense&quot;</value>
+            <value>&quot;OTHER - supplies&quot;</value>
+            <value>&quot;Phone expense&quot;</value>
+            <value>&quot;Phone/Internet&quot;</value>
+            <value>&quot;Public storage&quot;</value>
+            <value>&quot;purchase office furniture &amp; move&quot;</value>
+            <value>&quot;rent&quot;</value>
+            <value>&quot;stationary&quot;</value>
+            <value>&quot;Storage Expense&quot;</value>
+            <value>&quot;supplies&quot;</value>
+            <value>&quot;Supply expense&quot;</value>
+            <value>&quot;Technology expense&quot;</value>
+            <value>&quot;telecommunications&quot;</value>
+            <value>&quot;Telephone expense&quot;</value>
+            <value>&quot;Wireless expense&quot;</value>
+          </bin>
+          <bin value='&quot;Auto Exp&quot;'>
+            <value>&quot;Auto Exp&quot;</value>
+            <value>&quot;Auto Expenses&quot;</value>
+            <value>&quot;delivery&quot;</value>
+            <value>&quot;Moving expense&quot;</value>
+            <value>&quot;Other (travel within and out of district)&quot;</value>
+            <value>&quot;parking&quot;</value>
+            <value>&quot;parking  for  meeting&quot;</value>
+            <value>&quot;parking for event&quot;</value>
+            <value>&quot;parking for meeting&quot;</value>
+            <value>&quot;TOLLS&quot;</value>
+            <value>&quot;Transportation&quot;</value>
+            <value>&quot;Transportation Equipment &amp; Related Expen&quot;</value>
+            <value>&quot;Transportation Equipment &amp; Related Expense&quot;</value>
+            <value>&quot;Transportation/Lunch&quot;</value>
+            <value>&quot;Vehicle expense&quot;</value>
+          </bin>
+          <bin value='&quot;Banquet Ticket&quot;'>
+            <value>&quot;Banquet Ticket&quot;</value>
+            <value>&quot;catering for event for volunteers&quot;</value>
+            <value>&quot;catering for event hosted by Mayor Pro Tem for sister city org&quot;</value>
+            <value>&quot;catering public event&quot;</value>
+            <value>&quot;Food&quot;</value>
+            <value>&quot;food &amp; beverage&quot;</value>
+            <value>&quot;Food and beverage expense&quot;</value>
+            <value>&quot;Food expense&quot;</value>
+            <value>&quot;food for budget and fiscal affairs meeting&quot;</value>
+            <value>&quot;food gifts for volunteers&quot;</value>
+            <value>&quot;food/beverage&quot;</value>
+            <value>&quot;Food/Beverage Expense&quot;</value>
+            <value>&quot;Food/Beverage/Expense&quot;</value>
+            <value>&quot;Food/Beverages&quot;</value>
+            <value>&quot;gas &amp; food&quot;</value>
+            <value>&quot;Lunch for Workers&quot;</value>
+            <value>&quot;lunch meeting with staff&quot;</value>
+            <value>&quot;M &amp; E&quot;</value>
+            <value>&quot;Meal expense&quot;</value>
+            <value>&quot;staff dinner&quot;</value>
+            <value>&quot;staff lunch&quot;</value>
+            <value>&quot;staff luncheon&quot;</value>
+            <value>&quot;staff refreshments&quot;</value>
+          </bin>
+          <bin value='&quot;Campaign filing expense&quot;'>
+            <value>&quot;Campaign filing expense&quot;</value>
+            <value>&quot;Endorsement Expense&quot;</value>
+            <value>&quot;Fee&quot;</value>
+            <value>&quot;Fees&quot;</value>
+            <value>&quot;Filing Fee&quot;</value>
+          </bin>
+          <bin value='&quot;Charitable gift - event sponsorship - Houston Bday event&quot;'>
+            <value>&quot;Charitable gift - event sponsorship - Houston Bday event&quot;</value>
+            <value>&quot;Charitable gift - event sponsorship - Salute to Mayor Parker&quot;</value>
+            <value>&quot;Gift expense&quot;</value>
+            <value>&quot;Gift/Award/Memorial s Expense&quot;</value>
+            <value>&quot;Gift/Award/Memorials Expense&quot;</value>
+            <value>&quot;Gift/Awards/Memorials Expense&quot;</value>
+            <value>&quot;Gifts/Awards/Memorials Expense&quot;</value>
+            <value>&quot;Gits/Awards/Memorials Expense&quot;</value>
+            <value>&quot;Houston brand items for gifts for sister city event&quot;</value>
+            <value>&quot;Offering&quot;</value>
+            <value>&quot;Sponsorship expense&quot;</value>
+          </bin>
+          <bin value='&quot;Community expense&quot;'>
+            <value>&quot;Community expense&quot;</value>
+            <value>&quot;Community outreach epense&quot;</value>
+            <value>&quot;Community outreach expense&quot;</value>
+            <value>&quot;Constituent Outreach&quot;</value>
+            <value>&quot;Constituent Service&quot;</value>
+            <value>&quot;Constituent services&quot;</value>
+            <value>&quot;Constituent Services/Duties&quot;</value>
+            <value>&quot;Field Activity&quot;</value>
+            <value>&quot;Field expense&quot;</value>
+            <value>&quot;Field Operations&quot;</value>
+            <value>&quot;Field Program&quot;</value>
+            <value>&quot;Other: Voter Outreach&quot;</value>
+            <value>&quot;OUTREACH&quot;</value>
+            <value>&quot;Outreach expense&quot;</value>
+            <value>&quot;Voter contact expense&quot;</value>
+            <value>&quot;Voter outreach&quot;</value>
+            <value>&quot;Voter outreach expense&quot;</value>
+          </bin>
+          <bin value='&quot;compliance&quot;'>
+            <value>&quot;compliance&quot;</value>
+            <value>&quot;Compliance expense&quot;</value>
+            <value>&quot;Legal Services&quot;</value>
+          </bin>
+          <bin value='&quot;contribution&quot;'>
+            <value>&quot;contribution&quot;</value>
+            <value>&quot;Contribution - Online&quot;</value>
+            <value>&quot;Contribution expense&quot;</value>
+            <value>&quot;Contribution/Donation&quot;</value>
+            <value>&quot;contributions&quot;</value>
+            <value>&quot;contributions/Donations&quot;</value>
+            <value>&quot;Contributions/Donations Made  By Candidate/Officeholder/Political Committee&quot;</value>
+            <value>&quot;Contributions/Donations Made By Candidate&quot;</value>
+            <value>&quot;Contributions/Donations Made By Candidate/Officeholder/Political Committee&quot;</value>
+            <value>&quot;Contributions/Donations Made By Candidate/Officeholder/Political Committee Book&quot;</value>
+            <value>&quot;Contributuion - Online&quot;</value>
+            <value>&quot;Donation&quot;</value>
+            <value>&quot;Donation expense&quot;</value>
+            <value>&quot;Donations&quot;</value>
+          </bin>
+          <bin value='&quot;copes&quot;'>
+            <value>&quot;copes&quot;</value>
+            <value>&quot;copies&quot;</value>
+            <value>&quot;Print Expense&quot;</value>
+            <value>&quot;printing&quot;</value>
+            <value>&quot;Printing Expense&quot;</value>
+          </bin>
+          <bin value='&quot;Loan Repayment/Reimbursement&quot;'>
+            <value>&quot;Loan Repayment/Reimbursement&quot;</value>
+            <value>&quot;OTHER - REFUND&quot;</value>
+            <value>&quot;OTHER - Reimbursement&quot;</value>
+            <value>&quot;Other: refund&quot;</value>
+            <value>&quot;Refund&quot;</value>
+            <value>&quot;Reimbursement&quot;</value>
+            <value>&quot;Return of Contribution&quot;</value>
+          </bin>
+          <bin value='&quot;Polling Expense&quot;'>
+            <value>&quot;Polling Expense&quot;</value>
+            <value>&quot;Research expense&quot;</value>
+          </bin>
+          <bin value='&quot;travel&quot;'>
+            <value>&quot;travel&quot;</value>
+            <value>&quot;Travel in District&quot;</value>
+          </bin>
+          <bin value='&quot;travel out of distri8ct&quot;'>
+            <value>&quot;travel out of distri8ct&quot;</value>
+            <value>&quot;Travel Out Of District&quot;</value>
+          </bin>
+        </calculation>
+        <aliases>
+          <alias key='&quot;20121031&quot;' value='Other' />
+          <alias key='&quot;Accounting Expense&quot;' value='Accounting/Banking' />
+          <alias key='&quot;ad&quot;' value='Advertising Expense' />
+          <alias key='&quot;Administrative expense&quot;' value='Salaries/Wages/Contract Labor' />
+          <alias key='&quot;Admission&quot;' value='Event Expense' />
+          <alias key='&quot;Archiving expense&quot;' value='Office Overhead/Rental Expense' />
+          <alias key='&quot;Auto Exp&quot;' value='Transportation Equipment &amp; Related Expense' />
+          <alias key='&quot;Banquet Ticket&quot;' value='Food/Beverage Expense' />
+          <alias key='&quot;Campaign filing expense&quot;' value='Fees' />
+          <alias key='&quot;Charitable gift - event sponsorship - Houston Bday event&quot;' value='Gift/Awards/Memorials Expense' />
+          <alias key='&quot;Community expense&quot;' value='Community Outreach &amp; Constituent Services' />
+          <alias key='&quot;compliance&quot;' value='Legal Services' />
+          <alias key='&quot;contribution&quot;' value='Contributions/Donations Made By Candidate/Officeholder/Political Committee' />
+          <alias key='&quot;copes&quot;' value='Printing Expense' />
+          <alias key='&quot;Loan Repayment/Reimbursement&quot;' value='Loan Repayment/Reimbursement and Donor Refunds' />
+          <alias key='&quot;Polling Expense&quot;' value='Polling Expense' />
+          <alias key='&quot;travel&quot;' value='Travel in District' />
+          <alias key='&quot;travel out of distri8ct&quot;' value='Travel Out Of District' />
+        </aliases>
       </column>
       <column caption='Expense Candidate Beneficiary Name' datatype='string' name='[ExpenseCandidateBeneficiaryName]' role='dimension' type='nominal'>
       </column>
@@ -7029,6 +7660,74 @@
       </column>
       <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
         <calculation class='tableau' formula='1' />
+      </column>
+      <column datatype='string' name='[Office Sought or Held (group)]' role='dimension' type='nominal'>
+        <calculation class='categorical-bin' column='[Calculation_6000516161457122]'>
+          <bin value='&quot;City Council - At Large Position 1&quot;'>
+            <value>&quot;City Council - At Large Position 1&quot;</value>
+            <value>&quot;Houston City Council, At Large Position 1&quot;</value>
+            <value>&quot;Houston City Council, At-Large Position 1&quot;</value>
+          </bin>
+          <bin value='&quot;City Council - At Large Position 3&quot;'>
+            <value>&quot;City Council - At Large Position 3&quot;</value>
+            <value>&quot;Houston City Council At-Large Position 3 (Special Election)&quot;</value>
+          </bin>
+          <bin value='&quot;City Council - At Large Position 4&quot;'>
+            <value>&quot;City Council - At Large Position 4&quot;</value>
+            <value>&quot;HOUSTON CITY COUNCIL, POS 4&quot;</value>
+          </bin>
+          <bin value='&quot;City Council - At Large Position 5&quot;'>
+            <value>&quot;City Council - At Large Position 5&quot;</value>
+            <value>&quot;Houston City Council At Large Position 5&quot;</value>
+            <value>&quot;Houston City Council At-Large Position 5&quot;</value>
+          </bin>
+          <bin value='&quot;City Council - District D&quot;'>
+            <value>&quot;City Council - District D&quot;</value>
+            <value>&quot;City Council District D&quot;</value>
+            <value>&quot;City Council, District D&quot;</value>
+            <value>&quot;Houston City Council- District D&quot;</value>
+            <value>&quot;Houston City Council-District D&quot;</value>
+            <value>&quot;HOUSTON CITY COUNCIL, DIST D&quot;</value>
+            <value>&quot;Houston City Council, District D&quot;</value>
+          </bin>
+          <bin value='&quot;City Council - District E&quot;'>
+            <value>&quot;City Council - District E&quot;</value>
+            <value>&quot;City Council, District E&quot;</value>
+            <value>&quot;Houston City Council District E&quot;</value>
+            <value>&quot;Houston City Council, District E&quot;</value>
+          </bin>
+          <bin value='&quot;City Council - District G&quot;'>
+            <value>&quot;City Council - District G&quot;</value>
+            <value>&quot;Houston City Council District G&quot;</value>
+          </bin>
+          <bin value='&quot;City Council - District H&quot;'>
+            <value>&quot;City Council - District H&quot;</value>
+            <value>&quot;Houston City Council, District H&quot;</value>
+          </bin>
+          <bin value='&quot;Harris County School Trustee&quot;'>
+            <value>&quot;Harris County School Trustee&quot;</value>
+            <value>&quot;Harris County School Trustee Position 6, PCT 1&quot;</value>
+            <value>&quot;N/A&quot;</value>
+            <value>&quot;Trustee-Houston Community College District IV&quot;</value>
+            <value>&quot;x&quot;</value>
+          </bin>
+          <bin value='&quot;Mayor&quot;'>
+            <value>&quot;Mayor&quot;</value>
+            <value>&quot;Mayor, City of Houston&quot;</value>
+          </bin>
+        </calculation>
+        <aliases>
+          <alias key='&quot;City Council - At Large Position 1&quot;' value='City Council - At Large Position 1' />
+          <alias key='&quot;City Council - At Large Position 3&quot;' value='City Council - At Large Position 3' />
+          <alias key='&quot;City Council - At Large Position 4&quot;' value='City Council - At Large Position 4' />
+          <alias key='&quot;City Council - At Large Position 5&quot;' value='City Council - At Large Position 5' />
+          <alias key='&quot;City Council - District D&quot;' value='City Council - District D' />
+          <alias key='&quot;City Council - District E&quot;' value='City Council - District E' />
+          <alias key='&quot;City Council - District G&quot;' value='City Council - District G' />
+          <alias key='&quot;City Council - District H&quot;' value='City Council - District H' />
+          <alias key='&quot;Harris County School Trustee&quot;' value='Unknown' />
+          <alias key='&quot;Mayor&quot;' value='Mayor' />
+        </aliases>
       </column>
       <column caption='Office Held' datatype='string' name='[OfficeHeld]' role='dimension' type='nominal'>
       </column>
@@ -7105,12 +7804,22 @@
         <folder-item name='[BallotMeasureID]' type='field' />
       </folder>
       <folder name='Candidate Info' role='dimensions'>
+        <folder-item name='[Calculation_0980516152237968]' type='field' />
+        <folder-item name='[Calculation_6000516161457122]' type='field' />
+        <folder-item name='[Calculation_8640516161205410]' type='field' />
+        <folder-item name='[Candidate Name (group)]' type='field' />
         <folder-item name='[CandidateFirstName]' type='field' />
         <folder-item name='[CandidateFullName]' type='field' />
         <folder-item name='[CandidateLastName]' type='field' />
         <folder-item name='[CandidatePhone]' type='field' />
         <folder-item name='[OfficeHeld]' type='field' />
         <folder-item name='[OfficeSought]' type='field' />
+      </folder>
+      <folder name='Cleaned Dimensions' role='dimensions'>
+        <folder-item name='[Candidate or Committee Name (group)]' type='field' />
+        <folder-item name='[Election Type (group)]' type='field' />
+        <folder-item name='[Expense Category (group)]' type='field' />
+        <folder-item name='[Office Sought or Held (group)]' type='field' />
       </folder>
       <folder name='Committee Info' role='dimensions'>
         <folder-item name='[CandidateCommitteeAddressStreet]' type='field' />
@@ -7203,7 +7912,7 @@
         <folder-item name='[Runoff]' type='field' />
       </folder>
       <extract count='-1' enabled='true' units='records'>
-        <connection class='dataengine' dbname='C:\Users\Alex\Documents\Hackathon 2015\City-of-Houston-Campaign-Finance-Explorer-master\CFR_Campaign_Finance_Transactions (CSC.CFR_Campaign_Finance_Transactions) (OpenData).tde' schema='Extract' tablename='Extract' update-time='05/16/2015 05:05:07 PM'>
+        <connection class='dataengine' dbname='C:\Users\e140852\Documents\GitHub\City-of-Houston-Campaign-Finance-Explorer\CFR_Campaign_Finance_Transactions (CSC.CFR_Campaign_Finance_Transactions) (OpenData).tde' schema='Extract' tablename='Extract' update-time='05/16/2015 05:05:07 PM'>
           <relation name='Extract' table='[Extract].[Extract]' type='table' />
           <calculations>
             <calculation column='[Number of Records]' formula='1' />
@@ -9723,6 +10432,506 @@
       <table>
         <view>
           <datasources>
+            <datasource caption='CFR_Campaign_Finance_Transactions (CSC.CFR_Campaign_Finance_Transactions) (OpenData)' name='sqlserver.42140.501410567129' />
+          </datasources>
+          <datasource-dependencies datasource='sqlserver.42140.501410567129'>
+            <column datatype='string' name='[Expense Category (group)]' role='dimension' type='nominal'>
+              <calculation class='categorical-bin' column='[ExpenseCategory]'>
+                <bin value='&quot;20121031&quot;'>
+                  <value>&quot;20121031&quot;</value>
+                  <value>&quot;20121130&quot;</value>
+                  <value>&quot;20121231&quot;</value>
+                  <value>&quot;Campaign&quot;</value>
+                  <value>&quot;Campaign administration expense&quot;</value>
+                  <value>&quot;Campaign Adminstration Expense&quot;</value>
+                  <value>&quot;Campaign expense&quot;</value>
+                  <value>&quot;Campaign expenses&quot;</value>
+                  <value>&quot;Campaign Income&quot;</value>
+                  <value>&quot;Campaign Support&quot;</value>
+                  <value>&quot;Membership expense&quot;</value>
+                  <value>&quot;Other&quot;</value>
+                  <value>&quot;OTHER (enter a category not listed above)&quot;</value>
+                  <value>&quot;OTHER (Online Expense)&quot;</value>
+                  <value>&quot;Services&quot;</value>
+                  <value>&quot;Stakes&quot;</value>
+                  <value>&quot;xxxxxxxxx&quot;</value>
+                  <value>&quot;xxxxxxxxxxx&quot;</value>
+                </bin>
+                <bin value='&quot;Accounting Expense&quot;'>
+                  <value>&quot;Accounting Expense&quot;</value>
+                  <value>&quot;accounting services&quot;</value>
+                  <value>&quot;Accounting/ Banking&quot;</value>
+                  <value>&quot;Accounting/Banking&quot;</value>
+                  <value>&quot;Accounting/Banking Services&quot;</value>
+                  <value>&quot;American Express&quot;</value>
+                  <value>&quot;Baking&quot;</value>
+                  <value>&quot;BANK CHARGE&quot;</value>
+                  <value>&quot;Bank Charges&quot;</value>
+                  <value>&quot;bank charges new checks&quot;</value>
+                  <value>&quot;Bank Chge&quot;</value>
+                  <value>&quot;Bank Chges&quot;</value>
+                  <value>&quot;bank fees&quot;</value>
+                  <value>&quot;Banking&quot;</value>
+                  <value>&quot;Banking expense&quot;</value>
+                  <value>&quot;CHECK ORDER&quot;</value>
+                  <value>&quot;credit card processing fee&quot;</value>
+                  <value>&quot;Financial Services&quot;</value>
+                  <value>&quot;stop payment fee for lost check&quot;</value>
+                </bin>
+                <bin value='&quot;ad&quot;'>
+                  <value>&quot;ad&quot;</value>
+                  <value>&quot;ad in program&quot;</value>
+                  <value>&quot;Advertisement&quot;</value>
+                  <value>&quot;Advertising&quot;</value>
+                  <value>&quot;Advertising  Expense&quot;</value>
+                  <value>&quot;Advertising Expense&quot;</value>
+                  <value>&quot;Communication expense&quot;</value>
+                  <value>&quot;Courier expense&quot;</value>
+                  <value>&quot;Design expense&quot;</value>
+                  <value>&quot;direct mail and printing&quot;</value>
+                  <value>&quot;Email expense&quot;</value>
+                  <value>&quot;Iprint Flyers&quot;</value>
+                  <value>&quot;Jensen Jubilee Community Event T Shirt Order&quot;</value>
+                  <value>&quot;Mail&quot;</value>
+                  <value>&quot;Mail expense&quot;</value>
+                  <value>&quot;Mailer Design&quot;</value>
+                  <value>&quot;Mailer expense&quot;</value>
+                  <value>&quot;Mailing&quot;</value>
+                  <value>&quot;Mailing expense&quot;</value>
+                  <value>&quot;Markerting&quot;</value>
+                  <value>&quot;Marketing&quot;</value>
+                  <value>&quot;Media&quot;</value>
+                  <value>&quot;Media expense&quot;</value>
+                  <value>&quot;Online expense&quot;</value>
+                  <value>&quot;Photo expense&quot;</value>
+                  <value>&quot;post office box rental&quot;</value>
+                  <value>&quot;postage&quot;</value>
+                  <value>&quot;Postage expense&quot;</value>
+                  <value>&quot;PROMOTIONS&quot;</value>
+                  <value>&quot;Public relations expense&quot;</value>
+                  <value>&quot;reprint of photo for use in Mayor Pro Tem office&quot;</value>
+                  <value>&quot;SIGNS AND ADVERTISING&quot;</value>
+                  <value>&quot;Social Media&quot;</value>
+                  <value>&quot;T-shirt expense&quot;</value>
+                  <value>&quot;telemarketing&quot;</value>
+                  <value>&quot;Web expense&quot;</value>
+                  <value>&quot;Web Services&quot;</value>
+                  <value>&quot;Website&quot;</value>
+                  <value>&quot;Website expense&quot;</value>
+                  <value>&quot;website fee&quot;</value>
+                  <value>&quot;website fees&quot;</value>
+                </bin>
+                <bin value='&quot;Administrative expense&quot;'>
+                  <value>&quot;Administrative expense&quot;</value>
+                  <value>&quot;Administrative staff expense&quot;</value>
+                  <value>&quot;BLOCK WALK TEAM&quot;</value>
+                  <value>&quot;Bonus&quot;</value>
+                  <value>&quot;Card Pushers&quot;</value>
+                  <value>&quot;Compliance consulting&quot;</value>
+                  <value>&quot;consultants&quot;</value>
+                  <value>&quot;Consulting&quot;</value>
+                  <value>&quot;Consulting Expense&quot;</value>
+                  <value>&quot;Consulting Fee&quot;</value>
+                  <value>&quot;Consulting Fees&quot;</value>
+                  <value>&quot;contract labor&quot;</value>
+                  <value>&quot;contract services&quot;</value>
+                  <value>&quot;Labor&quot;</value>
+                  <value>&quot;Melissa Noriega&quot;</value>
+                  <value>&quot;Salaries/Wages/Contract Labor&quot;</value>
+                  <value>&quot;Salary&quot;</value>
+                  <value>&quot;STAFF&quot;</value>
+                  <value>&quot;staff bonus&quot;</value>
+                  <value>&quot;Staff expense&quot;</value>
+                  <value>&quot;Volunteer expense&quot;</value>
+                  <value>&quot;Year End Bonus&quot;</value>
+                </bin>
+                <bin value='&quot;Admission&quot;'>
+                  <value>&quot;Admission&quot;</value>
+                  <value>&quot;Appreciation Event Support&quot;</value>
+                  <value>&quot;Campaign Event&quot;</value>
+                  <value>&quot;Community event&quot;</value>
+                  <value>&quot;Community event expense&quot;</value>
+                  <value>&quot;Early Vote and Election Day Activity&quot;</value>
+                  <value>&quot;event&quot;</value>
+                  <value>&quot;event deposit - to honor outgoing finance dir.&quot;</value>
+                  <value>&quot;Event Expense&quot;</value>
+                  <value>&quot;Event Expenses&quot;</value>
+                  <value>&quot;event sponsor&quot;</value>
+                  <value>&quot;event sponsorship&quot;</value>
+                  <value>&quot;Fundraiser Expense&quot;</value>
+                  <value>&quot;Fundraising expense&quot;</value>
+                  <value>&quot;meeting&quot;</value>
+                  <value>&quot;Meeting and appreciation expense&quot;</value>
+                  <value>&quot;Meeting expense&quot;</value>
+                  <value>&quot;meeting expense dinner&quot;</value>
+                  <value>&quot;meeting sponsorship&quot;</value>
+                  <value>&quot;meeting with council staff&quot;</value>
+                  <value>&quot;meetings&quot;</value>
+                  <value>&quot;Production expense&quot;</value>
+                  <value>&quot;Producton&quot;</value>
+                  <value>&quot;public event&quot;</value>
+                  <value>&quot;table decorations for event hosted by Mayor Pro Tem&quot;</value>
+                </bin>
+                <bin value='&quot;Archiving expense&quot;'>
+                  <value>&quot;Archiving expense&quot;</value>
+                  <value>&quot;Campaign database expense&quot;</value>
+                  <value>&quot;Campaign Office&quot;</value>
+                  <value>&quot;Campaign Phone&quot;</value>
+                  <value>&quot;Database expense&quot;</value>
+                  <value>&quot;equipment expense&quot;</value>
+                  <value>&quot;Hardware&quot;</value>
+                  <value>&quot;Headquarters expense&quot;</value>
+                  <value>&quot;Information technology expense&quot;</value>
+                  <value>&quot;Insurance expense&quot;</value>
+                  <value>&quot;Internet&quot;</value>
+                  <value>&quot;internet commection&quot;</value>
+                  <value>&quot;internet connection&quot;</value>
+                  <value>&quot;Internet expense&quot;</value>
+                  <value>&quot;lease termination&quot;</value>
+                  <value>&quot;Maintenance&quot;</value>
+                  <value>&quot;map&quot;</value>
+                  <value>&quot;Map expense&quot;</value>
+                  <value>&quot;name badges&quot;</value>
+                  <value>&quot;OFFICE&quot;</value>
+                  <value>&quot;Office Equipment&quot;</value>
+                  <value>&quot;Office expense&quot;</value>
+                  <value>&quot;Office Overhead&quot;</value>
+                  <value>&quot;Office Overhead/ Rental Expense&quot;</value>
+                  <value>&quot;Office Overhead/Rental Expense&quot;</value>
+                  <value>&quot;Office Overhead/Rental Expense paper clips,staples, stapler, jumbo clips&quot;</value>
+                  <value>&quot;office rent&quot;</value>
+                  <value>&quot;office sup  printer ink&quot;</value>
+                  <value>&quot;Office Supplies&quot;</value>
+                  <value>&quot;Office Supplies/Phones&quot;</value>
+                  <value>&quot;Office Supplies/Printing&quot;</value>
+                  <value>&quot;Operation expense&quot;</value>
+                  <value>&quot;OTHER - supplies&quot;</value>
+                  <value>&quot;Phone expense&quot;</value>
+                  <value>&quot;Phone/Internet&quot;</value>
+                  <value>&quot;Public storage&quot;</value>
+                  <value>&quot;purchase office furniture &amp; move&quot;</value>
+                  <value>&quot;rent&quot;</value>
+                  <value>&quot;stationary&quot;</value>
+                  <value>&quot;Storage Expense&quot;</value>
+                  <value>&quot;supplies&quot;</value>
+                  <value>&quot;Supply expense&quot;</value>
+                  <value>&quot;Technology expense&quot;</value>
+                  <value>&quot;telecommunications&quot;</value>
+                  <value>&quot;Telephone expense&quot;</value>
+                  <value>&quot;Wireless expense&quot;</value>
+                </bin>
+                <bin value='&quot;Auto Exp&quot;'>
+                  <value>&quot;Auto Exp&quot;</value>
+                  <value>&quot;Auto Expenses&quot;</value>
+                  <value>&quot;delivery&quot;</value>
+                  <value>&quot;Moving expense&quot;</value>
+                  <value>&quot;Other (travel within and out of district)&quot;</value>
+                  <value>&quot;parking&quot;</value>
+                  <value>&quot;parking  for  meeting&quot;</value>
+                  <value>&quot;parking for event&quot;</value>
+                  <value>&quot;parking for meeting&quot;</value>
+                  <value>&quot;TOLLS&quot;</value>
+                  <value>&quot;Transportation&quot;</value>
+                  <value>&quot;Transportation Equipment &amp; Related Expen&quot;</value>
+                  <value>&quot;Transportation Equipment &amp; Related Expense&quot;</value>
+                  <value>&quot;Transportation/Lunch&quot;</value>
+                  <value>&quot;Vehicle expense&quot;</value>
+                </bin>
+                <bin value='&quot;Banquet Ticket&quot;'>
+                  <value>&quot;Banquet Ticket&quot;</value>
+                  <value>&quot;catering for event for volunteers&quot;</value>
+                  <value>&quot;catering for event hosted by Mayor Pro Tem for sister city org&quot;</value>
+                  <value>&quot;catering public event&quot;</value>
+                  <value>&quot;Food&quot;</value>
+                  <value>&quot;food &amp; beverage&quot;</value>
+                  <value>&quot;Food and beverage expense&quot;</value>
+                  <value>&quot;Food expense&quot;</value>
+                  <value>&quot;food for budget and fiscal affairs meeting&quot;</value>
+                  <value>&quot;food gifts for volunteers&quot;</value>
+                  <value>&quot;food/beverage&quot;</value>
+                  <value>&quot;Food/Beverage Expense&quot;</value>
+                  <value>&quot;Food/Beverage/Expense&quot;</value>
+                  <value>&quot;Food/Beverages&quot;</value>
+                  <value>&quot;gas &amp; food&quot;</value>
+                  <value>&quot;Lunch for Workers&quot;</value>
+                  <value>&quot;lunch meeting with staff&quot;</value>
+                  <value>&quot;M &amp; E&quot;</value>
+                  <value>&quot;Meal expense&quot;</value>
+                  <value>&quot;staff dinner&quot;</value>
+                  <value>&quot;staff lunch&quot;</value>
+                  <value>&quot;staff luncheon&quot;</value>
+                  <value>&quot;staff refreshments&quot;</value>
+                </bin>
+                <bin value='&quot;Campaign filing expense&quot;'>
+                  <value>&quot;Campaign filing expense&quot;</value>
+                  <value>&quot;Endorsement Expense&quot;</value>
+                  <value>&quot;Fee&quot;</value>
+                  <value>&quot;Fees&quot;</value>
+                  <value>&quot;Filing Fee&quot;</value>
+                </bin>
+                <bin value='&quot;Charitable gift - event sponsorship - Houston Bday event&quot;'>
+                  <value>&quot;Charitable gift - event sponsorship - Houston Bday event&quot;</value>
+                  <value>&quot;Charitable gift - event sponsorship - Salute to Mayor Parker&quot;</value>
+                  <value>&quot;Gift expense&quot;</value>
+                  <value>&quot;Gift/Award/Memorial s Expense&quot;</value>
+                  <value>&quot;Gift/Award/Memorials Expense&quot;</value>
+                  <value>&quot;Gift/Awards/Memorials Expense&quot;</value>
+                  <value>&quot;Gifts/Awards/Memorials Expense&quot;</value>
+                  <value>&quot;Gits/Awards/Memorials Expense&quot;</value>
+                  <value>&quot;Houston brand items for gifts for sister city event&quot;</value>
+                  <value>&quot;Offering&quot;</value>
+                  <value>&quot;Sponsorship expense&quot;</value>
+                </bin>
+                <bin value='&quot;Community expense&quot;'>
+                  <value>&quot;Community expense&quot;</value>
+                  <value>&quot;Community outreach epense&quot;</value>
+                  <value>&quot;Community outreach expense&quot;</value>
+                  <value>&quot;Constituent Outreach&quot;</value>
+                  <value>&quot;Constituent Service&quot;</value>
+                  <value>&quot;Constituent services&quot;</value>
+                  <value>&quot;Constituent Services/Duties&quot;</value>
+                  <value>&quot;Field Activity&quot;</value>
+                  <value>&quot;Field expense&quot;</value>
+                  <value>&quot;Field Operations&quot;</value>
+                  <value>&quot;Field Program&quot;</value>
+                  <value>&quot;Other: Voter Outreach&quot;</value>
+                  <value>&quot;OUTREACH&quot;</value>
+                  <value>&quot;Outreach expense&quot;</value>
+                  <value>&quot;Voter contact expense&quot;</value>
+                  <value>&quot;Voter outreach&quot;</value>
+                  <value>&quot;Voter outreach expense&quot;</value>
+                </bin>
+                <bin value='&quot;compliance&quot;'>
+                  <value>&quot;compliance&quot;</value>
+                  <value>&quot;Compliance expense&quot;</value>
+                  <value>&quot;Legal Services&quot;</value>
+                </bin>
+                <bin value='&quot;contribution&quot;'>
+                  <value>&quot;contribution&quot;</value>
+                  <value>&quot;Contribution - Online&quot;</value>
+                  <value>&quot;Contribution expense&quot;</value>
+                  <value>&quot;Contribution/Donation&quot;</value>
+                  <value>&quot;contributions&quot;</value>
+                  <value>&quot;contributions/Donations&quot;</value>
+                  <value>&quot;Contributions/Donations Made  By Candidate/Officeholder/Political Committee&quot;</value>
+                  <value>&quot;Contributions/Donations Made By Candidate&quot;</value>
+                  <value>&quot;Contributions/Donations Made By Candidate/Officeholder/Political Committee&quot;</value>
+                  <value>&quot;Contributions/Donations Made By Candidate/Officeholder/Political Committee Book&quot;</value>
+                  <value>&quot;Contributuion - Online&quot;</value>
+                  <value>&quot;Donation&quot;</value>
+                  <value>&quot;Donation expense&quot;</value>
+                  <value>&quot;Donations&quot;</value>
+                </bin>
+                <bin value='&quot;copes&quot;'>
+                  <value>&quot;copes&quot;</value>
+                  <value>&quot;copies&quot;</value>
+                  <value>&quot;Print Expense&quot;</value>
+                  <value>&quot;printing&quot;</value>
+                  <value>&quot;Printing Expense&quot;</value>
+                </bin>
+                <bin value='&quot;Loan Repayment/Reimbursement&quot;'>
+                  <value>&quot;Loan Repayment/Reimbursement&quot;</value>
+                  <value>&quot;OTHER - REFUND&quot;</value>
+                  <value>&quot;OTHER - Reimbursement&quot;</value>
+                  <value>&quot;Other: refund&quot;</value>
+                  <value>&quot;Refund&quot;</value>
+                  <value>&quot;Reimbursement&quot;</value>
+                  <value>&quot;Return of Contribution&quot;</value>
+                </bin>
+                <bin value='&quot;Polling Expense&quot;'>
+                  <value>&quot;Polling Expense&quot;</value>
+                  <value>&quot;Research expense&quot;</value>
+                </bin>
+                <bin value='&quot;travel&quot;'>
+                  <value>&quot;travel&quot;</value>
+                  <value>&quot;Travel in District&quot;</value>
+                </bin>
+                <bin value='&quot;travel out of distri8ct&quot;'>
+                  <value>&quot;travel out of distri8ct&quot;</value>
+                  <value>&quot;Travel Out Of District&quot;</value>
+                </bin>
+              </calculation>
+              <aliases>
+                <alias key='&quot;20121031&quot;' value='Other' />
+                <alias key='&quot;Accounting Expense&quot;' value='Accounting/Banking' />
+                <alias key='&quot;ad&quot;' value='Advertising Expense' />
+                <alias key='&quot;Administrative expense&quot;' value='Salaries/Wages/Contract Labor' />
+                <alias key='&quot;Admission&quot;' value='Event Expense' />
+                <alias key='&quot;Archiving expense&quot;' value='Office Overhead/Rental Expense' />
+                <alias key='&quot;Auto Exp&quot;' value='Transportation Equipment &amp; Related Expense' />
+                <alias key='&quot;Banquet Ticket&quot;' value='Food/Beverage Expense' />
+                <alias key='&quot;Campaign filing expense&quot;' value='Fees' />
+                <alias key='&quot;Charitable gift - event sponsorship - Houston Bday event&quot;' value='Gift/Awards/Memorials Expense' />
+                <alias key='&quot;Community expense&quot;' value='Community Outreach &amp; Constituent Services' />
+                <alias key='&quot;compliance&quot;' value='Legal Services' />
+                <alias key='&quot;contribution&quot;' value='Contributions/Donations Made By Candidate/Officeholder/Political Committee' />
+                <alias key='&quot;copes&quot;' value='Printing Expense' />
+                <alias key='&quot;Loan Repayment/Reimbursement&quot;' value='Loan Repayment/Reimbursement and Donor Refunds' />
+                <alias key='&quot;Polling Expense&quot;' value='Polling Expense' />
+                <alias key='&quot;travel&quot;' value='Travel in District' />
+                <alias key='&quot;travel out of distri8ct&quot;' value='Travel Out Of District' />
+              </aliases>
+            </column>
+            <column caption='Expense Category' datatype='string' name='[ExpenseCategory]' role='dimension' type='nominal'>
+            </column>
+            <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
+              <calculation class='tableau' formula='1' />
+            </column>
+            <column caption='Transaction Amount' datatype='real' name='[TransactionAmount]' role='measure' type='quantitative'>
+            </column>
+            <column-instance column='[Number of Records]' derivation='Sum' name='[sum:Number of Records:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[TransactionAmount]' derivation='Sum' name='[sum:TransactionAmount:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[sqlserver.42140.501410567129].[:Measure Names]'>
+            <groupfilter function='union' user:op='manual'>
+              <groupfilter function='member' level='[:Measure Names]' member='&quot;[sqlserver.42140.501410567129].[sum:Number of Records:qk]&quot;' />
+              <groupfilter function='member' level='[:Measure Names]' member='&quot;[sqlserver.42140.501410567129].[sum:TransactionAmount:qk]&quot;' />
+            </groupfilter>
+          </filter>
+          <slices>
+            <column>[sqlserver.42140.501410567129].[:Measure Names]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='header'>
+            <format attr='width' field='[sqlserver.42140.501410567129].[Expense Category (group)]' value='488' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <text column='[sqlserver.42140.501410567129].[Multiple Values]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[sqlserver.42140.501410567129].[Expense Category (group)]</rows>
+        <cols>[sqlserver.42140.501410567129].[:Measure Names]</cols>
+      </table>
+    </worksheet>
+    <worksheet name='Sheet 2'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='CFR_Campaign_Finance_Transactions (CSC.CFR_Campaign_Finance_Transactions) (OpenData)' name='sqlserver.42140.501410567129' />
+          </datasources>
+          <datasource-dependencies datasource='sqlserver.42140.501410567129'>
+            <column caption='Office Sought or Held' datatype='string' name='[Calculation_6000516161457122]' role='dimension' type='nominal'>
+              <calculation class='tableau' formula='Iif(TRIM([OfficeSought])=&quot;N/A&quot; OR TRIM([OfficeSought])=&quot;X&quot; OR ISNULL([OfficeSought]),&#13;&#10;[OfficeHeld],[OfficeSought])' />
+            </column>
+            <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
+              <calculation class='tableau' formula='1' />
+            </column>
+            <column datatype='string' name='[Office Sought or Held (group)]' role='dimension' type='nominal'>
+              <calculation class='categorical-bin' column='[Calculation_6000516161457122]'>
+                <bin value='&quot;City Council - At Large Position 1&quot;'>
+                  <value>&quot;City Council - At Large Position 1&quot;</value>
+                  <value>&quot;Houston City Council, At Large Position 1&quot;</value>
+                  <value>&quot;Houston City Council, At-Large Position 1&quot;</value>
+                </bin>
+                <bin value='&quot;City Council - At Large Position 3&quot;'>
+                  <value>&quot;City Council - At Large Position 3&quot;</value>
+                  <value>&quot;Houston City Council At-Large Position 3 (Special Election)&quot;</value>
+                </bin>
+                <bin value='&quot;City Council - At Large Position 4&quot;'>
+                  <value>&quot;City Council - At Large Position 4&quot;</value>
+                  <value>&quot;HOUSTON CITY COUNCIL, POS 4&quot;</value>
+                </bin>
+                <bin value='&quot;City Council - At Large Position 5&quot;'>
+                  <value>&quot;City Council - At Large Position 5&quot;</value>
+                  <value>&quot;Houston City Council At Large Position 5&quot;</value>
+                  <value>&quot;Houston City Council At-Large Position 5&quot;</value>
+                </bin>
+                <bin value='&quot;City Council - District D&quot;'>
+                  <value>&quot;City Council - District D&quot;</value>
+                  <value>&quot;City Council District D&quot;</value>
+                  <value>&quot;City Council, District D&quot;</value>
+                  <value>&quot;Houston City Council- District D&quot;</value>
+                  <value>&quot;Houston City Council-District D&quot;</value>
+                  <value>&quot;HOUSTON CITY COUNCIL, DIST D&quot;</value>
+                  <value>&quot;Houston City Council, District D&quot;</value>
+                </bin>
+                <bin value='&quot;City Council - District E&quot;'>
+                  <value>&quot;City Council - District E&quot;</value>
+                  <value>&quot;City Council, District E&quot;</value>
+                  <value>&quot;Houston City Council District E&quot;</value>
+                  <value>&quot;Houston City Council, District E&quot;</value>
+                </bin>
+                <bin value='&quot;City Council - District G&quot;'>
+                  <value>&quot;City Council - District G&quot;</value>
+                  <value>&quot;Houston City Council District G&quot;</value>
+                </bin>
+                <bin value='&quot;City Council - District H&quot;'>
+                  <value>&quot;City Council - District H&quot;</value>
+                  <value>&quot;Houston City Council, District H&quot;</value>
+                </bin>
+                <bin value='&quot;Harris County School Trustee&quot;'>
+                  <value>&quot;Harris County School Trustee&quot;</value>
+                  <value>&quot;Harris County School Trustee Position 6, PCT 1&quot;</value>
+                  <value>&quot;N/A&quot;</value>
+                  <value>&quot;Trustee-Houston Community College District IV&quot;</value>
+                  <value>&quot;x&quot;</value>
+                </bin>
+                <bin value='&quot;Mayor&quot;'>
+                  <value>&quot;Mayor&quot;</value>
+                  <value>&quot;Mayor, City of Houston&quot;</value>
+                </bin>
+              </calculation>
+              <aliases>
+                <alias key='&quot;City Council - At Large Position 1&quot;' value='City Council - At Large Position 1' />
+                <alias key='&quot;City Council - At Large Position 3&quot;' value='City Council - At Large Position 3' />
+                <alias key='&quot;City Council - At Large Position 4&quot;' value='City Council - At Large Position 4' />
+                <alias key='&quot;City Council - At Large Position 5&quot;' value='City Council - At Large Position 5' />
+                <alias key='&quot;City Council - District D&quot;' value='City Council - District D' />
+                <alias key='&quot;City Council - District E&quot;' value='City Council - District E' />
+                <alias key='&quot;City Council - District G&quot;' value='City Council - District G' />
+                <alias key='&quot;City Council - District H&quot;' value='City Council - District H' />
+                <alias key='&quot;Harris County School Trustee&quot;' value='Unknown' />
+                <alias key='&quot;Mayor&quot;' value='Mayor' />
+              </aliases>
+            </column>
+            <column-instance column='[Number of Records]' derivation='Sum' name='[sum:Number of Records:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='header'>
+            <format attr='width' field='[sqlserver.42140.501410567129].[Office Sought or Held (group)]' value='308' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <text column='[sqlserver.42140.501410567129].[sum:Number of Records:qk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[sqlserver.42140.501410567129].[Office Sought or Held (group)]</rows>
+        <cols></cols>
+      </table>
+    </worksheet>
+    <worksheet name='Sheet 3'>
+      <table>
+        <view>
+          <datasources>
           </datasources>
           <aggregation value='true' />
         </view>
@@ -9734,6 +10943,11 @@
               <breakdown value='auto' />
             </view>
             <mark class='Automatic' />
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='false' />
+              </style-rule>
+            </style>
           </pane>
         </panes>
         <rows></rows>
@@ -9743,7 +10957,65 @@
   </worksheets>
   <windows>
     <window class='schema' source-height='-1' />
-    <window auto-hidden='0' class='worksheet' maximized='1' name='Sheet 1'>
+    <window auto-hidden='0' class='worksheet' maximized='0' name='Sheet 1'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+            <card type='measures' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <zoom type='fit-width' />
+      </viewpoint>
+      <highlight>
+        <color-one-way>
+          <field>[sqlserver.42140.501410567129].[Calculation_4680516180048388]</field>
+          <field>[sqlserver.42140.501410567129].[Calculation_6380516180048374]</field>
+          <field>[sqlserver.42140.501410567129].[Office Sought or Held (group)]</field>
+          <field>[sqlserver.42140.501410567129].[none:BallotMeasureDescription:nk]</field>
+          <field>[sqlserver.42140.501410567129].[none:BallotMeasureID:nk]</field>
+          <field>[sqlserver.42140.501410567129].[none:Calculation_0980516152237968:nk]</field>
+          <field>[sqlserver.42140.501410567129].[none:Calculation_8640516161205410:nk]</field>
+          <field>[sqlserver.42140.501410567129].[none:CandidateFullName:nk]</field>
+          <field>[sqlserver.42140.501410567129].[none:CandidateOrCommittee:nk]</field>
+          <field>[sqlserver.42140.501410567129].[none:CommitteeName:nk]</field>
+          <field>[sqlserver.42140.501410567129].[none:ElectionDate:qk]</field>
+          <field>[sqlserver.42140.501410567129].[none:ExpenseCategory:nk]</field>
+          <field>[sqlserver.42140.501410567129].[none:MasterTransactionType:nk]</field>
+          <field>[sqlserver.42140.501410567129].[none:TransactionType:nk]</field>
+          <field>[sqlserver.42140.501410567129].[yr:ElectionDate:ok]</field>
+        </color-one-way>
+      </highlight>
+      <selection-collection>
+        <node-selection select-tuples='false'>
+          <oriented-node-reference orientation='vertical'>
+            <node-reference>
+              <fields>
+                <field>[sqlserver.42140.501410567129].[Expense Category (group)]</field>
+              </fields>
+              <multibucket>
+                <bucket>&quot;ad&quot;</bucket>
+              </multibucket>
+            </node-reference>
+            <page-reference>
+            </page-reference>
+          </oriented-node-reference>
+        </node-selection>
+      </selection-collection>
+    </window>
+    <window auto-hidden='0' class='worksheet' maximized='0' name='Sheet 2'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -9763,28 +11035,709 @@
       </cards>
       <highlight>
         <color-one-way>
-          <field>[sqlserver.42140.501410567129].[none:BallotMeasureDescription:nk]</field>
-          <field>[sqlserver.42140.501410567129].[none:BallotMeasureID:nk]</field>
-          <field>[sqlserver.42140.501410567129].[none:ElectionDate:qk]</field>
-          <field>[sqlserver.42140.501410567129].[none:MasterTransactionType:nk]</field>
-          <field>[sqlserver.42140.501410567129].[none:TransactionType:nk]</field>
-          <field>[sqlserver.42140.501410567129].[yr:ElectionDate:ok]</field>
+          <field>[sqlserver.42140.501410567129].[none:Calculation_6000516161457122:nk]</field>
+          <field>[sqlserver.42140.501410567129].[none:OfficeHeld:nk]</field>
+          <field>[sqlserver.42140.501410567129].[none:OfficeSought:nk]</field>
+        </color-one-way>
+      </highlight>
+    </window>
+    <window auto-hidden='0' class='worksheet' maximized='1' name='Sheet 3'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <zoom type='fit-width' />
+      </viewpoint>
+      <highlight>
+        <color-one-way>
+          <field>[sqlserver.42140.501410567129].[none:ElectionType:nk]</field>
+          <field>[sqlserver.42140.501410567129].[none:TransactionPartyFullName:nk]</field>
+          <field>[sqlserver.42140.501410567129].[none:TransactionPartyOccupation:nk]</field>
         </color-one-way>
       </highlight>
     </window>
   </windows>
   <thumbnails>
-    <thumbnail height='144' name='Sheet 1' width='174'>
-      iVBORw0KGgoAAAANSUhEUgAAAK4AAACQCAYAAACRfFAzAAAACXBIWXMAABJ0AAASdAHeZh94
-      AAABmUlEQVR4nO3SQQ0AIBDAMMC/58MDH7KkVbDH9szMgpjzOwBeGJck45JkXJKMS5JxSTIu
-      ScYlybgkGZck45JkXJKMS5JxSTIuScYlybgkGZck45JkXJKMS5JxSTIuScYlybgkGZck45Jk
-      XJKMS5JxSTIuScYlybgkGZck45JkXJKMS5JxSTIuScYlybgkGZck45JkXJKMS5JxSTIuScYl
-      ybgkGZck45JkXJKMS5JxSTIuScYlybgkGZck45JkXJKMS5JxSTIuScYlybgkGZck45JkXJKM
-      S5JxSTIuScYlybgkGZck45JkXJKMS5JxSTIuScYlybgkGZck45JkXJKMS5JxSTIuScYlybgk
-      GZck45JkXJKMS5JxSTIuScYlybgkGZck45JkXJKMS5JxSTIuScYlybgkGZck45JkXJKMS5Jx
-      STIuScYlybgkGZck45JkXJKMS5JxSTIuScYlybgkGZck45JkXJKMS5JxSTIuScYlybgkGZck
-      45JkXJKMS5JxSTIuScYlybgkGZck45JkXJKMS5JxSTIuSRePYgUc7kJNEQAAAABJRU5ErkJg
-      gg==
+    <thumbnail height='192' name='Sheet 1' width='192'>
+      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
+      G1fMzc0RDof5gz/4AxwOB8vLy3zzm9/klVde4fnnnxd94uXl5WxublJZWcnU1BSnTp1iZWWF
+      H/zgB3R2dtLX10dZWRnNzc2MjY3h8XhYXl5GpVLR3t4uLs9qampYWlri2rVrvPnmmxgMBjF4
+      tWV4er2emZkZ/H4/TU1N4t4ml8shCAI6nY7nn3+e2dlZTp06xSuvvEJtbS01NTWMjo6i0+mw
+      2WzkcjkikQgGgwGfz8eDDz7IhQsXyGazfOMb38BisdyBn0nig2LbJdBWoCYQCOBwOLBareIF
+      IpPJWFtbE33U8Xic7u5utFotarWaXC5HLBYjGAxy+PBhhoeHcbvdBAIB2tvbqaqqory8nJaW
+      Fqqqqqivr2d6elq8Ky8vL2M2mwkEAuh0Ourq6giFQpSXlyOTyfD7/QBiI4ympiaUSiWdnZ3I
+      5XIsFosoXPVfyy51Oh2nTp2itbWVqqoqEokEFRUVmM1m3G434+Pj2Gw2du/eLXbJKRQKVFZW
+      olarmZ2dFVXjJF/6R59bcoFKpZJY3VVXV8f169cBuPvuu0W1tvLycqxWK93d3UxOTlJTU4PL
+      5SKVStHe3o5arcbtdjM0NITX62Xv3r2Ul5fT3t5OY2Mjfr+f5uZmTCYTHo8HpVJJTU0NbW1t
+      ZDIZqqqqqKqqAqCpqQmLxUIul6Ompob6+noMBgOdnZ1otVrq6upIpVK4XC4cDgeVlZUYDAbc
+      bje5XA6tVovb7aa+vh6n0ykub+bn59nY2KBYLHLkyBFCoRBTU1PU1tby0EMPkUgkqKyspLq6
+      GofDgV6vx+12o9FouOuuuygrK0OtVtPQ0CAtgT7iSPUA3GwJu9UCSmJnIRmAxI7mFgOQgsIS
+      O41bdnHSelZip7GtGyOXyzE+Po5KpRLTkbew2+13ZHASEh802ybDPffcc1RUVLC5uYlKpaK/
+      v5/m5mYikQiHDx+mrq6OwcFB2tramJubQ61Wc+jQoTs9fgmJ34ptnwBzc3Pcf//9rK+vc/Hi
+      RaxWq+hKvHDhAm+88QYVFRVMT08TiUT4sz/7szs5bgmJ28K2gbC9e/dy9uxZLl26REtLC8Vi
+      UYyIarVaTCYT5eXltLa2olarJQlDiY8k2y6BisUifr8fhUKB3W4X+2hptVpyuRwajYZIJILF
+      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
+      r/kA6HZrgBwZz/AAAAAASUVORK5CYII=
+    </thumbnail>
+    <thumbnail height='192' name='Sheet 2' width='192'>
+      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
+      MhlqtZrdu3ezbt065ufnqayspLu7m+zsbPLz8yksLKSnp4eDBw9SXFzMlStXGB8fZ9u2bRw/
+      fpxt27axf/9+Kisr6evrY2pqirVr13Lp0iWmpqYoKyu76Ynr9XqWLFnCqVOnaG1tFXS/UqmU
+      Bx54QFCdvfLKK/zgBz+gvr6eubk5jEYjJSUlQvVhNDM4Pj5OOBwmNjYWo9FIVVXVbfh5RO4E
+      CoXiOnt0iUSCXC7H7/djt9spKyujra0NvV5PTk6OoGSEW8wAqampTE9P43K5MBqNBAIB5HI5
+      Go2GzMxMcnJyOHLkiGBpnpqaitlsJhAICI0otFotubm5OBwO4GrxUvSunpSURFFREU6nE7vd
+      Tnl5+Q37AszOzrJ3715hpolybSZXLpezZMkS/H4/4+Pj6HQ6QTZZVFQkyCc1Gg21tbVkZmai
+      VCqJiYkhEonQ2toqWKI3NjaKO2FfIKK/ddTKX6fT0dTUJHQoij4Onzt3jqGhIVQqlbDjJPvp
+      T3/60487cFpaGj09PXR0dBAIBEhJSSEUCpGYmIjJZKKoqIje3l6effZZpFIpcXFxmM1mLl++
+      zNTUFA888AATExOMjIzw0EMPERsby8jICAaDgZKSEnw+n9B+qKioSLjwNBoNqampeL1eqqur
+      MRgMLF26VBCQWywW+vr6GBsbY8WKFSQkJCCTyYT+BeXl5RgMBkZGRtBqtYL7w7Jly4RapLy8
+      PBwOhyBcb29v56mnnmLFihUYjUbKy8vFHbE7iNvt/szS2mgR3NjYGG63m+rqamJiYqitraW0
+      tBSlUkldXR3Z2dkEAgFWr16NwWDgpZdeeulzNcrevXs3JSUlrFu37jMNXEQkyu2QRLrdbsFl
+      5JMgaoJF7hnuGU2wKIkUuRtEIpG7cu3dUBQvInKnCYVCd+XaEzPBIvc1N93miEQieL1eYXdF
+      KpUSCoWQyWRIJJIbFi/5/X7BI1SlUn1q17NIJCLYFAaDQdRq9aJjBAIBYR9XrVYLe/pKpVI4
+      RnSrNbqT4/V6USgUwpgjkYiwrSuVSoVxw9VdheixRO5tgsEgx44dQ6fTUVdXh0wmIxKJ0N3d
+      jVKppKCgQNgS1el0HDt2jNTUVGHj5qYBMD4+zt69e0lLS8Pr9bJp0yZBgF5YWMiSJUuQy+UE
+      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
+      DoeDyclJqqurOXLkyIpx/J5RdjgcRi6Xi0a8eXl5OBwOAoEARqOR9evXo1Ao2LdvH3K5nPHx
+      cZKTk/nggw/Yvn07er2enJwcotEoPp+P5eVl5HK5tP15ybHZbOTk5BAOh/F4PBQWFjI2NoZe
+      r6eyspLMzEyhCX7qCrBr1y7OnTvH6OgoKpWKjRs3olarkcvl9Pf3s3nzZs6fPy+qMIuLi2lu
+      bqampoapqSnefPNNOjo6uHr1KmVlZYyMjNDW1iZslmK93PV6PXq9nlOnTgnX90dN01JTUx9r
+      j65UKrl//77Q/yYlJWG325mZmSEvLw+lUkliYiK9vb1oNBrgYbq8sLCQpqYmvvnmG/bv3y/a
+      vCclJfH999/jdDpFOYXEy0tqaiparRadTkdVVRVWq5V33nmHaDTKnTt3qK6uFp99JqPsU6dO
+      YTKZOHbs2D/7CyT+c0iaYIn/NKs1AaQ8gMR/mhWb3dUwK5aQUCqVq/LurZgA0gmIxGqxGu+e
+      dNwh8dLjcDgIhUJkZ2cTjUYZGBjAbrezceNGZDIZfX19FBYWotFouH37Nunp6aIn7P8Aamgg
+      YlA9hHwAAAAASUVORK5CYII=
+    </thumbnail>
+    <thumbnail height='144' name='Sheet 3' width='192'>
+      iVBORw0KGgoAAAANSUhEUgAAAMAAAACQCAYAAABeUmTwAAAACXBIWXMAAA7DAAAOwwHHb6hk
+      AAABl0lEQVR4nO3TMQEAIAzAMMC/5yFjRxMFfXpnZg5Eve0A2GQA0gxAmgFIMwBpBiDNAKQZ
+      gDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFI
+      MwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQD
+      kGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBp
+      BiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA
+      0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDN
+      AKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxA
+      mgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKR96KoFHAM5sswAAAAASUVORK5CYII=
     </thumbnail>
   </thumbnails>
 </workbook>
